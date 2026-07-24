@@ -1,0 +1,37 @@
+name: Chromatic
+
+# Visual regression: every PR gets a diff of all five components in both themes.
+# Requires the CHROMATIC_PROJECT_TOKEN secret (Settings → Secrets → Actions),
+# obtained by linking this repo at https://www.chromatic.com.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  chromatic:
+    runs-on: ubuntu-latest
+    # Skip on forks / before the token is set, so CI stays green until Chromatic is wired.
+    if: ${{ github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Chromatic needs full history to compare against the baseline
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build tokens
+        run: npm run build:tokens
+
+      - name: Publish to Chromatic
+        uses: chromaui/action@latest
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          onlyChanged: true # TurboSnap: only re-snapshot stories touched by the diff
+          exitZeroOnChanges: true # visual changes are reviewed in Chromatic, not a hard CI fail

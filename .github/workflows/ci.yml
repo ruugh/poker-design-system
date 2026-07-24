@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      # Rebuild tokens from source and fail if the committed dist/ drifted.
+      # This is what makes tokens/_source.json the single source of truth:
+      # a hand-edited dist/ can never merge.
+      - name: Build tokens
+        run: npm run build:tokens
+
+      - name: dist/ must match source
+        run: |
+          if ! git diff --exit-code -- dist/; then
+            echo "::error::dist/ is stale — run 'npm run build:tokens' and commit the result"
+            exit 1
+          fi
+
+      # The zero-hardcode gate: no raw hex, no px in spacing, no primitive vars.
+      - name: Lint CSS
+        run: npm run lint:css
+
+      - name: Hardcode metric
+        run: npm run lint:tokens
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Build Storybook
+        run: npm run build-storybook

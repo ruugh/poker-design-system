@@ -77,6 +77,31 @@ rejects, in the component layer:
 `npm run lint:tokens` counts every literal and exits non-zero if any remain — the
 number the case reports. CI runs both on every PR (Ф6).
 
+## CI
+
+Two workflows run on every push and PR (`.github/workflows/`):
+
+**`ci.yml`** — the correctness gate:
+1. `build:tokens` rebuilds `dist/` from `tokens/_source.json`, then **fails if `dist/`
+   drifted**. This is what makes the source file authoritative — a hand-edited or stale
+   `dist/` can't merge.
+2. `lint:css` + `lint:tokens` — the zero-hardcode gate.
+3. `typecheck` — `tsc --noEmit`.
+4. `build-storybook` — the deployable bundle compiles.
+
+**`chromatic.yml`** — visual regression. Every PR gets a diff of all five components in
+both themes; TurboSnap re-snapshots only what changed.
+
+### Wiring Chromatic (one-time)
+
+1. Link this repo at [chromatic.com](https://www.chromatic.com) → copy the project token.
+2. GitHub repo → Settings → Secrets and variables → Actions → new secret
+   `CHROMATIC_PROJECT_TOKEN`.
+
+Until the secret exists the Chromatic job no-ops on forks and skips gracefully; `ci.yml`
+stays green regardless. Run it locally any time with `npm run chromatic` (needs the token
+in the environment).
+
 ## Status
 
 - ✅ Ф1 — token architecture, OKLCH ramps, WCAG audit (0 fails, both themes)
@@ -84,7 +109,7 @@ number the case reports. CI runs both on every PR (Ф6).
 - ✅ Ф3 — Style Dictionary build, three targets, zero-hardcode gate
 - ✅ Ф4 — components (Button, Input, Card, Badge, Modal) with states
 - ✅ Ф5 — Storybook with a11y + light/dark toggle + token reference (`npm run storybook`, port 6107)
-- ⬜ Ф6 — GitHub Actions + Chromatic
+- ✅ Ф6 — GitHub Actions: build + drift gate + lint + typecheck + Storybook; Chromatic visual diff
 - ⬜ Ф7 — the loop: token change in Figma → PR → visual diff → deploy
 
 ## Storybook
