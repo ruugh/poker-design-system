@@ -1,0 +1,46 @@
+/* Card — quiet is the default for peer cards (hairline, no shadow); raised earns a
+   shadow and means "pay attention" (active / hero). */
+
+.pm-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-block);
+  padding: var(--pad-card);
+  border-radius: var(--radius-xl);
+  background-color: var(--color-surface-quiet);
+  border: 1px solid var(--color-border-base);
+}
+
+.pm-card--raised {
+  background-color: var(--color-surface-raised);
+  border-color: var(--color-border-base);
+  box-shadow: var(--shadow-raised);
+}
+
+.pm-card--selected {
+  background-color: var(--color-surface-selected);
+  border-color: var(--color-brand-border);
+}
+
+.pm-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--gap-block);
+}
+
+.pm-card__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.pm-card__subtitle {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  margin: 0;
+}

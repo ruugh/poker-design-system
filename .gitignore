@@ -2,3 +2,9 @@ node_modules/
 storybook-static/
 *.log
 .DS_Store
+
+# python
+__pycache__/
+*.pyc
+
+# dist/ is intentionally committed — it holds the generated design tokens

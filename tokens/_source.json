@@ -33,6 +33,17 @@
     "gap":{"section":24,"block":16,"inline":8,"tight":4},
     "radius":{"sm":4,"md":6,"lg":8,"xl":12,"pill":999}
   },
+  "elevation": {
+    "_note": "Composite shadows — not expressible as Figma colour Variables, so authored here and themed. Light carries elevation with soft shadow; dark reads it through surface lightness, so its shadow only deepens the edge.",
+    "raised": {
+      "light": "0 1px 2px rgba(13, 17, 22, 0.06), 0 4px 12px rgba(13, 17, 22, 0.08)",
+      "dark": "0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.5)"
+    },
+    "overlay": {
+      "light": "0 12px 32px rgba(13, 17, 22, 0.16)",
+      "dark": "0 16px 40px rgba(0, 0, 0, 0.6)"
+    }
+  },
   "text": {
     "Heading/Page":{"family":"Plus Jakarta Sans","style":"SemiBold","size":24,"lineHeight":32,"letterSpacing":0,"case":"ORIGINAL"},
     "Heading/Section":{"family":"Plus Jakarta Sans","style":"SemiBold","size":16,"lineHeight":24,"letterSpacing":0,"case":"ORIGINAL"},

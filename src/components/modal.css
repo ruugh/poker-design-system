@@ -1,0 +1,53 @@
+/* Modal — centred dialog over a scrim. Elevation from the overlay shadow token. */
+
+.pm-modal__backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: var(--color-overlay-scrim);
+  opacity: 0.5;
+}
+
+.pm-modal__viewport {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--pad-card);
+}
+
+.pm-modal {
+  position: relative;
+  width: 100%;
+  max-width: 26rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-block);
+  padding: var(--pad-card);
+  border-radius: var(--radius-xl);
+  background-color: var(--color-surface-raised);
+  border: 1px solid var(--color-border-base);
+  box-shadow: var(--shadow-overlay);
+}
+
+.pm-modal__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1.4;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.pm-modal__body {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+
+.pm-modal__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--gap-inline);
+}
