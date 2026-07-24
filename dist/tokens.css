@@ -89,6 +89,17 @@
   --azure-800: #004975;
   --azure-900: #003355;
   --azure-950: #00213a;
+  --plum-50: #feeefc;
+  --plum-100: #fddcf9;
+  --plum-200: #f8c1f2;
+  --plum-300: #eb9fe4;
+  --plum-400: #db7cd3;
+  --plum-500: #ce64c7;
+  --plum-600: #ab3fa5;
+  --plum-700: #8a2e85;
+  --plum-800: #6b2167;
+  --plum-900: #4c1649;
+  --plum-950: #330d31;
   --color-surface-page: var(--slate-50);
   --color-surface-base: var(--slate-0);
   --color-surface-quiet: var(--slate-0);
@@ -220,6 +231,50 @@
   --shadow-overlay: 0 16px 40px rgba(0, 0, 0, 0.6);
 }
 
+/* White-label brand themes */
+
+:root[data-brand="plum"], .brand-plum {
+  --color-surface-selected: var(--plum-50);
+  --color-surface-ink: var(--plum-950);
+  --color-brand-base: var(--plum-600);
+  --color-brand-ink: var(--plum-700);
+  --color-brand-wash: var(--plum-50);
+  --color-brand-border: var(--plum-200);
+  --color-focus-ring: var(--plum-600);
+  --color-nav-bg: var(--plum-950);
+  --color-nav-hover: var(--plum-900);
+  --color-nav-active: var(--plum-600);
+  --color-nav-text: var(--plum-200);
+  --color-nav-brand: var(--plum-300);
+  --color-nav-border: var(--plum-900);
+  --color-seg-active: var(--plum-600);
+  --color-ink-on-teal-soft: var(--plum-100);
+  --color-ink-on-ink-soft: var(--plum-200);
+  --color-chart-line: var(--plum-300);
+}
+
+:root[data-brand="plum"][data-theme="dark"], .brand-plum.theme-dark {
+  --color-surface-selected: var(--plum-900);
+  --color-surface-ink: var(--plum-950);
+  --color-text-on-brand: var(--plum-950);
+  --color-brand-base: var(--plum-500);
+  --color-brand-ink: var(--plum-300);
+  --color-brand-wash: var(--plum-900);
+  --color-brand-border: var(--plum-800);
+  --color-focus-ring: var(--plum-400);
+  --color-nav-bg: var(--plum-950);
+  --color-nav-hover: var(--plum-900);
+  --color-nav-active: var(--plum-600);
+  --color-nav-text: var(--plum-200);
+  --color-nav-brand: var(--plum-300);
+  --color-nav-border: var(--plum-900);
+  --color-seg-active: var(--plum-500);
+  --color-ink-on-teal: var(--plum-950);
+  --color-ink-on-teal-soft: var(--plum-900);
+  --color-ink-on-ink-soft: var(--plum-200);
+  --color-chart-line: var(--plum-300);
+}
+
 /* Type styles */
 
 .type-heading-page {
@@ -318,4 +373,3 @@
   line-height: 1.3;
   letter-spacing: 0;
 }
-

@@ -26,6 +26,7 @@ HUES = {
     'amber':  ( 73.0, 0.160),   # warning + sleeping segment
     'violet': (285.0, 0.190),   # pro segment
     'azure':  (245.0, 0.140),   # newbie segment
+    'plum':   (330.0, 0.185),   # white-label alternate brand (hue clear of all status colours)
 }
 CHROMA_SHAPE = {50: 0.14, 100: 0.28, 200: 0.48, 300: 0.68, 400: 0.86,
                 500: 0.97, 600: 1.00, 700: 0.88, 800: 0.74, 900: 0.58, 950: 0.44}

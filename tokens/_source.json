@@ -11,7 +11,12 @@
     "rose": {"50":"#ffefee","100":"#ffdfdd","200":"#ffc5c2","300":"#ffa09c","400":"#fa7575","500":"#ef5a5e","600":"#ca303c","700":"#a41f2c","800":"#801420","900":"#5c0d15","950":"#3e070c"},
     "amber": {"50":"#fdf2e3","100":"#fbe4c8","200":"#f5cf9e","300":"#e8b36b","400":"#d8952e","500":"#c78402","600":"#9c6602","700":"#7c5000","800":"#5f3d00","900":"#442a00","950":"#2e1b00"},
     "violet": {"50":"#f2f2ff","100":"#e5e5ff","200":"#d1d1ff","300":"#b6b4ff","400":"#9c95ff","500":"#8b7efe","600":"#6c5adb","700":"#5645b3","800":"#41338b","900":"#2d2364","950":"#1d1644"},
-    "azure": {"50":"#eaf5ff","100":"#d5ebff","200":"#b2dbff","300":"#89c5f7","400":"#5eaceb","500":"#3e9be1","600":"#0178be","700":"#005f98","800":"#004975","900":"#003355","950":"#00213a"}
+    "azure": {"50":"#eaf5ff","100":"#d5ebff","200":"#b2dbff","300":"#89c5f7","400":"#5eaceb","500":"#3e9be1","600":"#0178be","700":"#005f98","800":"#004975","900":"#003355","950":"#00213a"},
+    "plum": {"50":"#feeefc","100":"#fddcf9","200":"#f8c1f2","300":"#eb9fe4","400":"#db7cd3","500":"#ce64c7","600":"#ab3fa5","700":"#8a2e85","800":"#6b2167","900":"#4c1649","950":"#330d31"}
+  },
+  "brandThemes": {
+    "_note": "White-label axis. Each brand theme re-points every semantic token that resolves to the teal ramp onto another ramp, keeping the step number. Neutrals and status colours never move. Emitted as [data-brand=...] overrides.",
+    "plum": {"from": "teal", "to": "plum"}
   },
   "semantic": {
     "surface/page":{"light":"slate/50","dark":"slate/1000"},"surface/base":{"light":"slate/0","dark":"slate/950"},"surface/quiet":{"light":"slate/0","dark":"slate/950"},"surface/raised":{"light":"slate/0","dark":"slate/900"},"surface/sunken":{"light":"slate/100","dark":"slate/975"},"surface/hover":{"light":"slate/50","dark":"slate/900"},"surface/selected":{"light":"teal/50","dark":"teal/900"},"surface/ink":{"light":"teal/950","dark":"teal/950"},
