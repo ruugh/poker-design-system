@@ -1,6 +1,6 @@
 {
   "name": "@ruugh/poker-design-system",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "End-to-end design system for Poker Manager — Figma variables to production code, one source of truth.",
   "type": "module",
   "license": "MIT",
