@@ -7,15 +7,25 @@
   "scripts": {
     "build:tokens": "node scripts/build-tokens.mjs",
     "lint:css": "stylelint \"src/**/*.css\"",
-    "lint:tokens": "node scripts/lint-tokens.mjs"
+    "lint:tokens": "node scripts/lint-tokens.mjs",
+    "typecheck": "tsc --noEmit",
+    "storybook": "storybook dev -p 6107 --no-open",
+    "build-storybook": "storybook build"
   },
   "devDependencies": {
+    "@storybook/addon-a11y": "^8.6.14",
+    "@storybook/addon-essentials": "^8.6.14",
+    "@storybook/addon-themes": "^8.6.14",
+    "@storybook/react-vite": "^8.6.14",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^4.7.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
+    "storybook": "^8.6.14",
     "style-dictionary": "^4.3.0",
     "stylelint": "^16.10.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vite": "^5.4.21"
   }
 }

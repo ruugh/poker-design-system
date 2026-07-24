@@ -82,7 +82,20 @@ number the case reports. CI runs both on every PR (Ф6).
 - ✅ Ф1 — token architecture, OKLCH ramps, WCAG audit (0 fails, both themes)
 - ✅ Ф2 — three collections live in Figma, type scale 17 → 12, screens migrated
 - ✅ Ф3 — Style Dictionary build, three targets, zero-hardcode gate
-- ⬜ Ф4 — components (Button, Input, Card, Badge, Modal) with states
-- ⬜ Ф5 — Storybook + deploy
+- ✅ Ф4 — components (Button, Input, Card, Badge, Modal) with states
+- ✅ Ф5 — Storybook with a11y + light/dark toggle + token reference (`npm run storybook`, port 6107)
 - ⬜ Ф6 — GitHub Actions + Chromatic
 - ⬜ Ф7 — the loop: token change in Figma → PR → visual diff → deploy
+
+## Storybook
+
+```bash
+npm run storybook        # dev, http://localhost:6107
+npm run build-storybook  # static build for deploy
+```
+
+Every component ships stories for each state plus edge cases (long labels, error
+fields, empty). The theme toggle in the toolbar flips `data-theme` — the same
+mechanism production uses. **Foundations/Tokens** reads `dist/tokens.json` directly,
+so the token reference can't drift from what the components consume. The a11y addon
+runs axe on every story.

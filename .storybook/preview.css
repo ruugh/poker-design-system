@@ -1,0 +1,24 @@
+/* Storybook canvas chrome — sit stories on the real page surface so tokens read true. */
+body.sb-show-main {
+  background-color: var(--color-surface-page);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+}
+
+.pm-story {
+  padding: var(--pad-card);
+}
+
+.pm-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--gap-block);
+}
+
+.pm-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-block);
+  max-width: 26rem;
+}
