@@ -1,0 +1,17 @@
+{
+  "rules": {
+    "color-no-hex": true,
+    "declaration-property-value-disallowed-list": {
+      "/^(color|background|background-color|border|border-color|outline|outline-color|fill|stroke|box-shadow)/": [
+        "/rgb\\(/",
+        "/rgba\\(/",
+        "/hsl\\(/",
+        "/var\\(--(slate|teal|jade|rose|amber|violet|azure)-/"
+      ],
+      "/^(padding|margin|gap|row-gap|column-gap|border-radius|inset)/": [
+        "/\\b\\d+px\\b/",
+        "/\\b\\d*\\.?\\d+rem\\b/"
+      ]
+    }
+  }
+}

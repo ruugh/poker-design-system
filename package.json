@@ -1,0 +1,16 @@
+{
+  "name": "poker-design-system",
+  "version": "0.1.0",
+  "description": "End-to-end design system for Poker Manager — Figma variables to production code, one source of truth.",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "build:tokens": "node scripts/build-tokens.mjs",
+    "lint:css": "stylelint \"src/**/*.css\"",
+    "lint:tokens": "node scripts/lint-tokens.mjs"
+  },
+  "devDependencies": {
+    "style-dictionary": "^4.3.0",
+    "stylelint": "^16.10.0"
+  }
+}

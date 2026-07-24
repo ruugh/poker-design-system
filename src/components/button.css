@@ -1,0 +1,52 @@
+/* Button — seed component proving the token gate. Full component set lands in Ф4.
+   Every colour, space and radius is a semantic token: no hex, no px, no primitive vars. */
+
+.pm-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-inline);
+  padding: var(--pad-control) var(--pad-card);
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 150ms ease-out, border-color 150ms ease-out;
+}
+
+.pm-button:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+/* Primary */
+.pm-button--primary {
+  background-color: var(--color-brand-base);
+  color: var(--color-text-on-brand);
+}
+.pm-button--primary:hover {
+  background-color: var(--color-brand-ink);
+}
+.pm-button--primary:disabled {
+  background-color: var(--color-surface-sunken);
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+}
+
+/* Secondary */
+.pm-button--secondary {
+  background-color: var(--color-surface-base);
+  color: var(--color-text-primary);
+  border-color: var(--color-border-control);
+}
+.pm-button--secondary:hover {
+  background-color: var(--color-surface-hover);
+}
+.pm-button--secondary:disabled {
+  color: var(--color-text-muted);
+  border-color: var(--color-border-base);
+  cursor: not-allowed;
+}

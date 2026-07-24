@@ -1,0 +1,154 @@
+token                Light     Dark       primitives
+------------------------------------------------------------------------
+surface/sunken       #eaedf0   #181e23   slate-100 / slate-975
+surface/page         #f5f7f9   #0d1116   slate-50 / slate-1000
+surface/base         #ffffff   #1f262d   slate-0 / slate-950
+surface/quiet        #ffffff   #1f262d   slate-0 / slate-950
+surface/raised       #ffffff   #2a3139   slate-0 / slate-900
+surface/hover        #f5f7f9   #2a3139   slate-50 / slate-900
+surface/selected     #e9f6fb   #003744   teal-50 / teal-900
+surface/ink          #00242e   #00242e   teal-950 / teal-950
+border/base          #d8dde2   #353d45   slate-200 / slate-850
+border/strong        #c3c8ce   #3f4750   slate-300 / slate-800
+border/control       #757d85   #757d85   slate-600 / slate-600
+text/primary         #181e23   #f5f7f9   slate-975 / slate-50
+text/secondary       #586069   #a9b0b8   slate-700 / slate-400
+text/muted           #8d959d   #757d85   slate-500 / slate-600
+text/on-brand        #ffffff   #00242e   slate-0 / teal-950
+text/inverse         #ffffff   #181e23   slate-0 / slate-975
+brand/base           #00809c   #33a2c1   teal-600 / teal-500
+brand/ink            #00657c   #86c9df   teal-700 / teal-300
+brand/wash           #e9f6fb   #003744   teal-50 / teal-900
+brand/border         #b0dfee   #014d5f   teal-200 / teal-800
+success/base         #00866f   #04ac8f   jade-600 / jade-500
+success/ink          #026b58   #7dd1ba   jade-700 / jade-300
+success/wash         #e8f8f3   #003a2f   jade-50 / jade-900
+danger/base          #ca303c   #ef5a5e   rose-600 / rose-500
+danger/ink           #a41f2c   #ffa09c   rose-700 / rose-300
+danger/wash          #ffefee   #5c0d15   rose-50 / rose-900
+warning/base         #9c6602   #c78402   amber-600 / amber-500
+warning/ink          #7c5000   #e8b36b   amber-700 / amber-300
+warning/wash         #fdf2e3   #442a00   amber-50 / amber-900
+neutral/ink          #586069   #a9b0b8   slate-700 / slate-400
+neutral/wash         #eaedf0   #2a3139   slate-100 / slate-900
+focus/ring           #00809c   #58b2ce   teal-600 / teal-400
+seg/loyal            #00866f   #04ac8f   jade-600 / jade-500
+seg/active           #00809c   #33a2c1   teal-600 / teal-500
+seg/sleeping         #9c6602   #c78402   amber-600 / amber-500
+seg/pro              #6c5adb   #8b7efe   violet-600 / violet-500
+seg/bot              #ca303c   #ef5a5e   rose-600 / rose-500
+seg/newbie           #0178be   #3e9be1   azure-600 / azure-500
+seg/loyal-wash       #e8f8f3   #003a2f   jade-50 / jade-900
+seg/pro-wash         #f2f2ff   #2d2364   violet-50 / violet-900
+seg/sleeping-wash    #fdf2e3   #442a00   amber-50 / amber-900
+nav/bg               #00242e   #00242e   teal-950 / teal-950
+nav/hover            #003744   #003744   teal-900 / teal-900
+nav/active           #00809c   #00809c   teal-600 / teal-600
+nav/text             #b0dfee   #b0dfee   teal-200 / teal-200
+nav/text-active      #ffffff   #ffffff   slate-0 / slate-0
+nav/brand            #86c9df   #86c9df   teal-300 / teal-300
+nav/border           #003744   #003744   teal-900 / teal-900
+ink/on-teal          #ffffff   #00242e   slate-0 / teal-950
+ink/on-teal-soft     #d2edf6   #003744   teal-100 / teal-900
+ink/on-ink           #ffffff   #ffffff   slate-0 / slate-0
+ink/on-ink-soft      #b0dfee   #b0dfee   teal-200 / teal-200
+chart/line           #86c9df   #86c9df   teal-300 / teal-300
+overlay/scrim        #0d1116   #0d1116   slate-1000 / slate-1000
+
+=== LIGHT ===
+pair                       fg        bg         ratio  need  verdict
+------------------------------------------------------------------------
+body on card               #181e23 #ffffff  16.82   4.5  PASS
+body on page               #181e23 #f5f7f9  15.66   4.5  PASS
+body on quiet card         #181e23 #ffffff  16.82   4.5  PASS
+body on raised card        #181e23 #ffffff  16.82   4.5  PASS
+body on sunken strip       #181e23 #eaedf0  14.31   4.5  PASS
+body on selected row       #181e23 #e9f6fb  15.25   4.5  PASS
+secondary on card          #586069 #ffffff   6.38   4.5  PASS
+secondary on page          #586069 #f5f7f9   5.94   4.5  PASS
+secondary on sunken        #586069 #eaedf0   5.43   4.5  PASS
+secondary on raised        #586069 #ffffff   6.38   4.5  PASS
+overline 11 on quiet       #586069 #ffffff   6.38   4.5  PASS
+disabled/icon on card      #8d959d #ffffff   3.04   3.0  PASS
+link on card               #00657c #ffffff   6.66   4.5  PASS
+brand tag text             #00657c #e9f6fb   6.04   4.5  PASS
+brand icon on card         #00809c #ffffff   4.60   3.0  PASS
+button label on brand      #ffffff #00809c   4.60   4.5  PASS
+positive amount            #026b58 #ffffff   6.47   4.5  PASS
+success tag text           #026b58 #e8f8f3   5.90   4.5  PASS
+negative amount            #a41f2c #ffffff   7.47   4.5  PASS
+danger tag text            #a41f2c #ffefee   6.70   4.5  PASS
+warning text               #7c5000 #ffffff   6.99   4.5  PASS
+warning tag text           #7c5000 #fdf2e3   6.32   4.5  PASS
+neutral tag text           #586069 #eaedf0   5.43   4.5  PASS
+input border on card       #757d85 #ffffff   4.18   3.0  PASS
+input border on page       #757d85 #f5f7f9   3.89   3.0  PASS
+focus ring on card         #00809c #ffffff   4.60   3.0  PASS
+focus ring on page         #00809c #f5f7f9   4.28   3.0  PASS
+sidebar item               #b0dfee #00242e  11.33   4.5  PASS
+sidebar active item        #ffffff #00809c   4.60   4.5  PASS
+sidebar logo               #86c9df #00242e   8.85   4.5  PASS
+hero metric                #ffffff #00242e  16.26   4.5  PASS
+hero caption               #b0dfee #00242e  11.33   4.5  PASS
+hero sparkline             #86c9df #00242e   8.85   3.0  PASS
+teal panel text            #ffffff #00809c   4.60   4.5  PASS
+teal panel caption (large only) #d2edf6 #00809c   3.76   3.0  PASS
+segment loyal dot          #00866f #ffffff   4.53   3.0  PASS
+segment active dot         #00809c #ffffff   4.60   3.0  PASS
+segment sleeping dot       #9c6602 #ffffff   4.87   3.0  PASS
+segment pro dot            #6c5adb #ffffff   5.09   3.0  PASS
+segment bot dot            #ca303c #ffffff   5.25   3.0  PASS
+segment newbie dot         #0178be #ffffff   4.74   3.0  PASS
+text on loyal wash         #181e23 #e8f8f3  15.34   4.5  PASS
+text on pro wash           #181e23 #f2f2ff  15.15   4.5  PASS
+text on brand wash         #181e23 #e9f6fb  15.25   4.5  PASS
+
+=== DARK ===
+pair                       fg        bg         ratio  need  verdict
+------------------------------------------------------------------------
+body on card               #f5f7f9 #1f262d  14.24   4.5  PASS
+body on page               #f5f7f9 #0d1116  17.63   4.5  PASS
+body on quiet card         #f5f7f9 #1f262d  14.24   4.5  PASS
+body on raised card        #f5f7f9 #2a3139  12.25   4.5  PASS
+body on sunken strip       #f5f7f9 #181e23  15.66   4.5  PASS
+body on selected row       #f5f7f9 #003744  12.00   4.5  PASS
+secondary on card          #a9b0b8 #1f262d   6.98   4.5  PASS
+secondary on page          #a9b0b8 #0d1116   8.65   4.5  PASS
+secondary on sunken        #a9b0b8 #181e23   7.68   4.5  PASS
+secondary on raised        #a9b0b8 #2a3139   6.01   4.5  PASS
+overline 11 on quiet       #a9b0b8 #1f262d   6.98   4.5  PASS
+disabled/icon on card      #757d85 #1f262d   3.66   3.0  PASS
+link on card               #86c9df #1f262d   8.33   4.5  PASS
+brand tag text             #86c9df #003744   7.01   4.5  PASS
+brand icon on card         #33a2c1 #1f262d   5.15   3.0  PASS
+button label on brand      #00242e #33a2c1   5.48   4.5  PASS
+positive amount            #7dd1ba #1f262d   8.52   4.5  PASS
+success tag text           #7dd1ba #003a2f   7.11   4.5  PASS
+negative amount            #ffa09c #1f262d   7.83   4.5  PASS
+danger tag text            #ffa09c #5c0d15   7.06   4.5  PASS
+warning text               #e8b36b #1f262d   8.08   4.5  PASS
+warning tag text           #e8b36b #442a00   7.03   4.5  PASS
+neutral tag text           #a9b0b8 #2a3139   6.01   4.5  PASS
+input border on card       #757d85 #1f262d   3.66   3.0  PASS
+input border on page       #757d85 #0d1116   4.53   3.0  PASS
+focus ring on card         #58b2ce #1f262d   6.32   3.0  PASS
+focus ring on page         #58b2ce #0d1116   7.82   3.0  PASS
+sidebar item               #b0dfee #00242e  11.33   4.5  PASS
+sidebar active item        #ffffff #00809c   4.60   4.5  PASS
+sidebar logo               #86c9df #00242e   8.85   4.5  PASS
+hero metric                #ffffff #00242e  16.26   4.5  PASS
+hero caption               #b0dfee #00242e  11.33   4.5  PASS
+hero sparkline             #86c9df #00242e   8.85   3.0  PASS
+teal panel text            #00242e #33a2c1   5.48   4.5  PASS
+teal panel caption (large only) #003744 #33a2c1   4.34   3.0  PASS
+segment loyal dot          #04ac8f #1f262d   5.32   3.0  PASS
+segment active dot         #33a2c1 #1f262d   5.15   3.0  PASS
+segment sleeping dot       #c78402 #1f262d   4.90   3.0  PASS
+segment pro dot            #8b7efe #1f262d   4.74   3.0  PASS
+segment bot dot            #ef5a5e #1f262d   4.58   3.0  PASS
+segment newbie dot         #3e9be1 #1f262d   5.08   3.0  PASS
+text on loyal wash         #f5f7f9 #003a2f  11.88   4.5  PASS
+text on pro wash           #f5f7f9 #2d2364  12.73   4.5  PASS
+text on brand wash         #f5f7f9 #003744  12.00   4.5  PASS
+
+TOTAL FAILS: 0
