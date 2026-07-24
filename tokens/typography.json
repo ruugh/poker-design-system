@@ -1,0 +1,144 @@
+{
+  "Heading": {
+    "Page": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontWeight": "SemiBold",
+        "fontSize": "24px",
+        "lineHeight": "32px",
+        "letterSpacing": "0",
+        "textCase": "none"
+      }
+    },
+    "Section": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontWeight": "SemiBold",
+        "fontSize": "16px",
+        "lineHeight": "24px",
+        "letterSpacing": "0",
+        "textCase": "none"
+      }
+    }
+  },
+  "Title": {
+    "Card": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Inter",
+        "fontWeight": "Semi Bold",
+        "fontSize": "14px",
+        "lineHeight": "20px",
+        "letterSpacing": "0",
+        "textCase": "none"
+      }
+    }
+  },
+  "Body": {
+    "$type": "typography",
+    "$value": {
+      "fontFamily": "Inter",
+      "fontWeight": "Regular",
+      "fontSize": "14px",
+      "lineHeight": "22px",
+      "letterSpacing": "0",
+      "textCase": "none"
+    },
+    "Strong": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Inter",
+        "fontWeight": "Medium",
+        "fontSize": "14px",
+        "lineHeight": "22px",
+        "letterSpacing": "0",
+        "textCase": "none"
+      }
+    }
+  },
+  "Caption": {
+    "$type": "typography",
+    "$value": {
+      "fontFamily": "Inter",
+      "fontWeight": "Regular",
+      "fontSize": "12px",
+      "lineHeight": "18px",
+      "letterSpacing": "0",
+      "textCase": "none"
+    },
+    "Strong": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Inter",
+        "fontWeight": "Semi Bold",
+        "fontSize": "12px",
+        "lineHeight": "18px",
+        "letterSpacing": "0",
+        "textCase": "none"
+      }
+    }
+  },
+  "Label": {
+    "Overline": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Inter",
+        "fontWeight": "Semi Bold",
+        "fontSize": "11px",
+        "lineHeight": "16px",
+        "letterSpacing": "4%",
+        "textCase": "uppercase"
+      }
+    }
+  },
+  "Data": {
+    "Num": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Inter",
+        "fontWeight": "Medium",
+        "fontSize": "14px",
+        "lineHeight": "22px",
+        "letterSpacing": "0",
+        "textCase": "none"
+      }
+    }
+  },
+  "Button": {
+    "$type": "typography",
+    "$value": {
+      "fontFamily": "Inter",
+      "fontWeight": "Medium",
+      "fontSize": "14px",
+      "lineHeight": "22px",
+      "letterSpacing": "0",
+      "textCase": "none"
+    }
+  },
+  "Display": {
+    "Metric": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontWeight": "Bold",
+        "fontSize": "30px",
+        "lineHeight": "36px",
+        "letterSpacing": "0",
+        "textCase": "none"
+      }
+    },
+    "MetricSm": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontWeight": "SemiBold",
+        "fontSize": "20px",
+        "lineHeight": "26px",
+        "letterSpacing": "0",
+        "textCase": "none"
+      }
+    }
+  }
+}

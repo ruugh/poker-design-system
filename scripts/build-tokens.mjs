@@ -1,102 +1,105 @@
-// Build pipeline: Figma export (tokens/_source.json) -> Style Dictionary -> dist/*
+// Build pipeline: Tokens Studio DTCG source (tokens/*.json) -> Style Dictionary v5
+// (+ @tokens-studio/sd-transforms) -> dist/*
 //
-// Emits three targets from ONE source of truth:
-//   dist/tokens.css   :root (light) + [data-theme="dark"], semantic vars reference primitives
-//   dist/tokens.ts    typed constants + union types (a wrong token name fails at compile time)
+// Source is an authentic Tokens Studio set: per-set files, $themes.json (Colour
+// scheme × Brand), $metadata.json (set order). This is the same shape the Tokens
+// Studio Figma plugin reads and writes over its GitHub sync — so a designer editing
+// a variable and pushing lands here with no format translation.
+//
+// Emits three targets from that one source of truth:
+//   dist/tokens.css   :root (light) + [data-theme="dark"] + [data-brand] overrides
+//   dist/tokens.ts    typed constants + union types (a wrong token name fails to compile)
 //   dist/tokens.json  flat resolved map (both modes) for docs and the Storybook token page
-//
-// Style Dictionary owns colour + dimension transforms and CSS reference output.
-// Typography is emitted directly (composite type styles map cleanly to CSS utility classes).
 
 import StyleDictionary from 'style-dictionary';
+import { register } from '@tokens-studio/sd-transforms';
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 
+register(StyleDictionary); // adds the `tokens-studio` preprocessor + transform group
+
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const src = JSON.parse(readFileSync(resolve(root, 'tokens/_source.json'), 'utf8'));
+const T = resolve(root, 'tokens');
 const dist = resolve(root, 'dist');
 mkdirSync(dist, { recursive: true });
+const load = (f) => JSON.parse(readFileSync(resolve(T, f), 'utf8'));
 
-const WEIGHT = { Regular: 400, Medium: 500, SemiBold: 600, 'Semi Bold': 600, Bold: 700 };
+const metadata = load('$metadata.json');
 const kebab = (s) => s.toLowerCase().replace(/[\s/]+/g, '-');
+const refToVar = (r) => '--' + r.replace(/[{}]/g, '').replace(/\./g, '-'); // {teal.600} -> --teal-600
+const isRef = (v) => typeof v === 'string' && v.startsWith('{');
 
-// ---- 1. Resolve the Figma export into flat models --------------------------
-const primitives = {};                       // "slate-600" -> "#757d85"
-for (const [ramp, steps] of Object.entries(src.primitives))
-  for (const [step, hex] of Object.entries(steps)) primitives[`${ramp}-${step}`] = hex;
-
-const semantic = {};                         // "surface-page" -> { light, dark, refLight, refDark }
-for (const [name, m] of Object.entries(src.semantic)) {
-  const key = kebab(name), refL = kebab(m.light), refD = kebab(m.dark);
-  semantic[key] = { light: primitives[refL], dark: primitives[refD], refLight: refL, refDark: refD };
+// ---- flatten a DTCG node into { "a-b-c": { $value, $type } } ----------------
+function flatten(node, prefix = [], out = {}) {
+  for (const [k, v] of Object.entries(node)) {
+    if (k.startsWith('$')) continue;
+    if (v && typeof v === 'object' && ('$value' in v)) out[[...prefix, k].join('-')] = v;
+    else if (v && typeof v === 'object') flatten(v, [...prefix, k], out);
+  }
+  return out;
 }
 
-const scale = {};                            // "space-16" -> {value, unit, group}
-for (const [group, items] of Object.entries(src.scale))
-  for (const [k, v] of Object.entries(items)) {
-    const unit = group === 'radius' ? (v >= 999 ? 'px' : 'px') : 'rem';
-    scale[`${group}-${kebab(k)}`] = { value: v, unit, group };
-  }
+// ---- models parsed from the Tokens Studio sets -----------------------------
+const primPaints = flatten(load('primitives.json'));           // "teal-600" -> {$value:'#..'}
+const primitives = Object.fromEntries(
+  Object.entries(primPaints).map(([k, t]) => [k, t.$value]));
 
-// ---- 2. Style Dictionary token trees ---------------------------------------
-// Primitives + semantic live under distinct roots so names come out as
-// `slate-600` (private) vs `color-surface-page` (public API).
-function colorTree(mode) {
-  const t = {};
-  for (const [ramp, steps] of Object.entries(src.primitives)) {
-    t[ramp] = {};
-    for (const [step, hex] of Object.entries(steps)) t[ramp][step] = { value: hex, type: 'color' };
-  }
-  t.color = {};
-  for (const [name, m] of Object.entries(src.semantic)) {
-    const parts = kebab(name).split('-');
-    const ref = mode === 'dark' ? kebab(m.dark) : kebab(m.light);
-    let node = t.color;
-    for (let i = 0; i < parts.length - 1; i++) node = node[parts[i] ??= {}] ?? (node[parts[i]] = {});
-    node[parts[parts.length - 1]] = { value: `{${ref.replace('-', '.')}}`, type: 'color' };
-  }
-  return t;
+const scaleRaw = flatten(load('scale.json'));                  // "space-16" -> {$value:'16px'}
+const scale = {};
+for (const [k, t] of Object.entries(scaleRaw)) {
+  const group = k.split('-')[0];
+  const px = parseFloat(t.$value);
+  scale[k] = { value: px, group, css: group === 'radius' ? `${px}px` : `${px / 16}rem` };
 }
 
-function scaleTree() {
-  const t = {};
-  for (const [name, s] of Object.entries(scale)) {
-    const [group, ...rest] = name.split('-');
-    (t[group] ??= {})[rest.join('-')] = {
-      value: s.unit === 'rem' ? `${s.value / 16}rem` : `${s.value}px`, type: 'dimension'
-    };
-  }
-  return t;
+const semLight = flatten(load('semantic-light.json'));         // "color-surface-page" -> {$value:'{slate.50}'}
+const semDark = flatten(load('semantic-dark.json'));
+const semantic = {};
+for (const key of Object.keys(semLight)) {
+  const name = key.replace(/^color-/, '');
+  const refL = semLight[key].$value, refD = semDark[key].$value;
+  semantic[name] = {
+    refLight: refL.replace(/[{}]/g, '').replace('.', '-'),
+    refDark: refD.replace(/[{}]/g, '').replace('.', '-'),
+    light: primitives[refL.replace(/[{}]/g, '').replace('.', '-')],
+    dark: primitives[refD.replace(/[{}]/g, '').replace('.', '-')],
+  };
 }
 
+const brandOverride = flatten(load('brand-ace-high.json'));    // "color-brand-base" -> {$value:'{plum.600}'}
+const elevLight = flatten(load('elevation-light.json'));
+const elevDark = flatten(load('elevation-dark.json'));
+const typeRaw = load('typography.json');
+
+// ---- Style Dictionary: resolve + emit the colour layer ----------------------
+// SD (with the tokens-studio preprocessor) owns reference resolution and colour
+// normalisation; the custom format keeps semantic->primitive as a live var() so
+// runtime theming cascades instead of being flattened to hex.
 StyleDictionary.registerFormat({
   name: 'pm/css-vars',
   format: ({ dictionary, options }) => {
     const lines = dictionary.allTokens
       .filter(options.filter || (() => true))
       .map((t) => {
-        const ref = t.original.value;
-        // emit var() reference for semantic -> primitive so runtime theming cascades
-        if (options.refs && typeof ref === 'string' && ref.startsWith('{'))
-          return `  --${t.name}: var(--${ref.slice(1, -1).replace('.', '-')});`;
-        return `  --${t.name}: ${t.value};`;
+        const orig = t.original.$value ?? t.original.value;      // ref or literal, pre-resolve
+        if (options.refs && isRef(orig)) return `  --${t.name}: var(${refToVar(orig)});`;
+        return `  --${t.name}: ${t.$value ?? t.value};`;          // DTCG resolved value
       });
     return `${options.selector} {\n${lines.join('\n')}\n}`;
   },
 });
 
-const cssName = { type: 'name', name: 'pm/kebab', transform: (t) => t.path.join('-') };
-StyleDictionary.registerTransform(cssName);
-
-async function buildCss(mode, selector, filter) {
+async function buildColorCss(sources, selector, { filter, refs = true } = {}) {
   const sd = new StyleDictionary({
-    tokens: { ...colorTree(mode), ...(mode === 'light' ? scaleTree() : {}) },
-    log: { verbosity: 'silent' },
+    source: sources.map((f) => resolve(T, f)),
+    preprocessors: ['tokens-studio'],
+    usesDtcg: true,
+    log: { verbosity: 'silent', warnings: 'disabled' },
     platforms: {
       css: {
-        transforms: ['pm/kebab', 'color/css'],
-        files: [{ destination: 'x.css', format: 'pm/css-vars', options: { selector, refs: true, filter } }],
+        transforms: ['name/kebab', 'color/css'],
+        files: [{ destination: 'x.css', format: 'pm/css-vars', options: { selector, refs, filter } }],
       },
     },
   });
@@ -104,55 +107,70 @@ async function buildCss(mode, selector, filter) {
   return output;
 }
 
-// ---- 3. CSS: light :root (primitives + scale + semantic) + dark overrides ---
-const isSemantic = (t) => t.path[0] === 'color';
-const lightCss = await buildCss('light', ':root');
-const darkCss = await buildCss('dark', ':root[data-theme="dark"], .theme-dark', isSemantic);
+// scale is dimension-only; emit rem/px by group with a tiny direct renderer
+const scaleCss = Object.entries(scale)
+  .map(([k, s]) => `  --${k}: ${s.css};`).join('\n');
 
-// Elevation: composite shadows, themed. Injected into the light :root and the dark block.
-const elevation = Object.fromEntries(
-  Object.entries(src.elevation).filter(([k]) => !k.startsWith('_'))
-);
-const shadowVars = (mode) =>
-  Object.entries(elevation).map(([k, v]) => `  --shadow-${k}: ${v[mode]};`).join('\n');
-const lightWithShadow = lightCss.replace(/\n}$/, `\n${shadowVars('light')}\n}`);
-const darkWithShadow = darkCss.replace(/\n}$/, `\n${shadowVars('dark')}\n}`);
+const onlySemantic = (t) => t.path[0] === 'color';
+const primFilter = (t) => t.path[0] !== 'color';
 
-// ---- 3b. White-label brand axis ---------------------------------------------
-// For each brand theme, re-point every semantic token whose alias resolves to the
-// `from` ramp onto the `to` ramp, keeping the step. Neutrals/status never move.
-// Emitted as [data-brand] blocks, once per theme mode so it stacks with light/dark.
-const brandThemes = Object.fromEntries(
-  Object.entries(src.brandThemes || {}).filter(([k]) => !k.startsWith('_'))
-);
-function brandBlock(brandName, cfg, mode, selector) {
+// light :root = primitives + semantic-light (+ scale appended)
+let lightCss = await buildColorCss(['primitives.json', 'semantic-light.json'], ':root');
+lightCss = lightCss.replace(/\n}$/, `\n${scaleCss}\n}`);
+// dark = semantic overrides only
+const darkCss = await buildColorCss(
+  ['primitives.json', 'semantic-dark.json'], ':root[data-theme="dark"], .theme-dark',
+  { filter: onlySemantic });
+
+// elevation shadows, themed
+const shadowVars = (set) => Object.entries(set)
+  .map(([k, t]) => `  --shadow-${k.replace(/^shadow-/, '')}: ${t.$value};`).join('\n');
+const lightWithShadow = lightCss.replace(/\n}$/, `\n${shadowVars(elevLight)}\n}`);
+const darkWithShadow = darkCss.replace(/\n}$/, `\n${shadowVars(elevDark)}\n}`);
+
+// ---- white-label brand blocks ----------------------------------------------
+// The Ace High set re-points every brand-family token onto the plum ramp; emit it
+// per mode so [data-brand] stacks with light/dark. The step per mode comes from
+// the matching semantic token, so light/dark brand shades stay correct.
+function brandBlock(mode, selector) {
   const lines = [];
-  for (const [name, m] of Object.entries(src.semantic)) {
-    const ref = kebab(mode === 'dark' ? m.dark : m.light);       // e.g. "teal-600"
-    if (!ref.startsWith(cfg.from + '-')) continue;               // only brand-family tokens
-    const swapped = ref.replace(new RegExp('^' + cfg.from + '-'), cfg.to + '-');
-    lines.push(`  --color-${kebab(name)}: var(--${swapped});`);
+  for (const [key, t] of Object.entries(brandOverride)) {
+    const name = key.replace(/^color-/, '');
+    const swap = t.$extensions?.['com.poker.brandSwap'];
+    if (!swap) continue;
+    const semRef = mode === 'dark' ? semantic[name].refDark : semantic[name].refLight; // e.g. teal-600
+    if (!semRef.startsWith(swap.from + '-')) continue;      // this mode isn't brand-family: no swap
+    const swapped = semRef.replace(new RegExp('^' + swap.from + '-'), swap.to + '-');
+    lines.push(`  --color-${name}: var(--${swapped});`);
   }
   return lines.length ? `${selector} {\n${lines.join('\n')}\n}` : '';
 }
-const brandCss = [];
-for (const [brandName, cfg] of Object.entries(brandThemes)) {
-  brandCss.push(brandBlock(brandName, cfg, 'light', `:root[data-brand="${brandName}"], .brand-${brandName}`));
-  brandCss.push(brandBlock(brandName, cfg, 'dark',
-    `:root[data-brand="${brandName}"][data-theme="dark"], .brand-${brandName}.theme-dark`));
-}
-const brandSection = brandCss.filter(Boolean).join('\n\n');
+const brandSection = [
+  brandBlock('light', ':root[data-brand="plum"], .brand-plum'),
+  brandBlock('dark', ':root[data-brand="plum"][data-theme="dark"], .brand-plum.theme-dark'),
+].filter(Boolean).join('\n\n');
 
-// ---- 4. Typography (emitted directly) --------------------------------------
-const typeStyles = Object.entries(src.text).map(([name, s]) => {
+// ---- typography ------------------------------------------------------------
+const WEIGHT = { Regular: 400, Medium: 500, SemiBold: 600, 'Semi Bold': 600, Bold: 700 };
+const typeStyles = [];
+(function walk(node, prefix = []) {
+  for (const [k, v] of Object.entries(node)) {
+    if (k.startsWith('$')) continue;
+    if (v.$type === 'typography') typeStyles.push({ name: [...prefix, k].join('/'), v: v.$value });
+    else if (typeof v === 'object') walk(v, [...prefix, k]);
+  }
+})(typeRaw);
+const typeModel = typeStyles.map(({ name, v }) => {
   const cls = kebab(name);
-  const weight = WEIGHT[s.style] ?? 400;
-  const ls = typeof s.letterSpacing === 'string' && s.letterSpacing.endsWith('%')
-    ? `${(parseFloat(s.letterSpacing) / 100).toFixed(3)}em` : '0';
-  const tc = s.case === 'UPPER' ? '\n  text-transform: uppercase;' : '';
-  return { cls, name, family: s.family, weight, size: s.size, lh: s.lineHeight, ls, tc };
+  const weight = WEIGHT[v.fontWeight] ?? 400;
+  const size = parseFloat(v.fontSize);
+  const lh = v.lineHeight === 'AUTO' ? 'AUTO' : parseFloat(v.lineHeight);
+  const ls = typeof v.letterSpacing === 'string' && v.letterSpacing.endsWith('%')
+    ? `${(parseFloat(v.letterSpacing) / 100).toFixed(3)}em` : '0';
+  const tc = v.textCase === 'uppercase' ? '\n  text-transform: uppercase;' : '';
+  return { cls, name, family: v.fontFamily, weight, size, lh, ls, tc };
 });
-const typeCss = typeStyles.map((t) =>
+const typeCss = typeModel.map((t) =>
   `.type-${t.cls} {\n  font-family: var(--font-${t.family === 'Inter' ? 'sans' : 'display'});` +
   `\n  font-weight: ${t.weight};\n  font-size: ${+(t.size / 16).toFixed(4)}rem;` +
   `\n  line-height: ${t.lh === 'AUTO' ? 'normal' : +(t.lh / t.size).toFixed(3)};\n  letter-spacing: ${t.ls};${t.tc}\n}`
@@ -162,19 +180,17 @@ const fontVars = `:root {\n  --font-sans: 'Inter', system-ui, sans-serif;\n` +
   `  --font-display: 'Plus Jakarta Sans', var(--font-sans);\n}`;
 
 const banner = `/* PM Design System tokens — GENERATED by scripts/build-tokens.mjs.\n` +
-  `   Source: tokens/_source.json (Figma ${src._meta.source}). Do not edit by hand. */\n`;
+  `   Source: tokens/ (Tokens Studio DTCG set). Do not edit by hand. */\n`;
 writeFileSync(resolve(dist, 'tokens.css'),
   [banner, fontVars, lightWithShadow, darkWithShadow,
     brandSection ? '/* White-label brand themes */' : '', brandSection,
     '/* Type styles */', typeCss, ''].filter(Boolean).join('\n\n'));
 
-// ---- 5. tokens.ts — typed constants + union types --------------------------
-const q = (s) => `'${s}'`;
+// ---- tokens.ts -------------------------------------------------------------
 const tsColor = Object.keys(semantic).map((k) => `  '${k}': 'var(--color-${k})',`).join('\n');
-const tsSpace = Object.entries(scale).map(([k, s]) =>
-  `  '${k}': 'var(--${k})',`).join('\n');
-const tsType = typeStyles.map((t) => `  '${t.cls}': 'type-${t.cls}',`).join('\n');
-const ts =
+const tsSpace = Object.keys(scale).map((k) => `  '${k}': 'var(--${k})',`).join('\n');
+const tsType = typeModel.map((t) => `  '${t.cls}': 'type-${t.cls}',`).join('\n');
+writeFileSync(resolve(dist, 'tokens.ts'),
 `// PM Design System tokens — GENERATED by scripts/build-tokens.mjs. Do not edit by hand.
 // Every value is a CSS custom property; a name absent from the union fails to compile.
 
@@ -192,22 +208,23 @@ export const typography = {
 ${tsType}
 } as const;
 export type TypographyToken = keyof typeof typography;
-`;
-writeFileSync(resolve(dist, 'tokens.ts'), ts);
+`);
 
-// ---- 6. tokens.json — flat resolved map (both modes) for docs --------------
-const json = {
-  _meta: { generated_from: 'tokens/_source.json', figma: src._meta.source, extracted_at: src._meta.extracted_at },
+// ---- tokens.json -----------------------------------------------------------
+writeFileSync(resolve(dist, 'tokens.json'), JSON.stringify({
+  _meta: { generated_from: 'tokens/ (Tokens Studio DTCG set)', sets: metadata.tokenSetOrder },
   primitives,
   semantic: Object.fromEntries(Object.entries(semantic).map(([k, v]) =>
     [k, { light: v.light, dark: v.dark, refLight: v.refLight, refDark: v.refDark }])),
   scale: Object.fromEntries(Object.entries(scale).map(([k, s]) => [k, s.value])),
-  elevation: Object.fromEntries(Object.entries(elevation).map(([k, v]) => [k, { light: v.light, dark: v.dark }])),
-  typography: Object.fromEntries(typeStyles.map((t) =>
+  elevation: {
+    raised: { light: elevLight['raised']?.$value, dark: elevDark['raised']?.$value },
+    overlay: { light: elevLight['overlay']?.$value, dark: elevDark['overlay']?.$value },
+  },
+  typography: Object.fromEntries(typeModel.map((t) =>
     [t.cls, { family: t.family, weight: t.weight, size: t.size, lineHeight: t.lh }])),
-};
-writeFileSync(resolve(dist, 'tokens.json'), JSON.stringify(json, null, 2) + '\n');
+}, null, 2) + '\n');
 
-console.log(`built dist/tokens.{css,ts,json} — ` +
-  `${Object.keys(primitives).length} primitives, ${Object.keys(semantic).length} semantic, ` +
-  `${Object.keys(scale).length} scale, ${typeStyles.length} type styles`);
+console.log(`built dist/tokens.{css,ts,json} — ${Object.keys(primitives).length} primitives, ` +
+  `${Object.keys(semantic).length} semantic, ${Object.keys(scale).length} scale, ` +
+  `${typeModel.length} type styles`);

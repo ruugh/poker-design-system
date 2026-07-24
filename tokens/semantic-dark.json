@@ -1,0 +1,248 @@
+{
+  "color": {
+    "surface": {
+      "page": {
+        "$value": "{slate.1000}",
+        "$type": "color"
+      },
+      "base": {
+        "$value": "{slate.950}",
+        "$type": "color"
+      },
+      "quiet": {
+        "$value": "{slate.950}",
+        "$type": "color"
+      },
+      "raised": {
+        "$value": "{slate.900}",
+        "$type": "color"
+      },
+      "sunken": {
+        "$value": "{slate.975}",
+        "$type": "color"
+      },
+      "hover": {
+        "$value": "{slate.900}",
+        "$type": "color"
+      },
+      "selected": {
+        "$value": "{teal.900}",
+        "$type": "color"
+      },
+      "ink": {
+        "$value": "{teal.950}",
+        "$type": "color"
+      }
+    },
+    "border": {
+      "base": {
+        "$value": "{slate.850}",
+        "$type": "color"
+      },
+      "strong": {
+        "$value": "{slate.800}",
+        "$type": "color"
+      },
+      "control": {
+        "$value": "{slate.600}",
+        "$type": "color"
+      }
+    },
+    "text": {
+      "primary": {
+        "$value": "{slate.50}",
+        "$type": "color"
+      },
+      "secondary": {
+        "$value": "{slate.400}",
+        "$type": "color"
+      },
+      "muted": {
+        "$value": "{slate.600}",
+        "$type": "color"
+      },
+      "on-brand": {
+        "$value": "{teal.950}",
+        "$type": "color"
+      },
+      "inverse": {
+        "$value": "{slate.975}",
+        "$type": "color"
+      }
+    },
+    "brand": {
+      "base": {
+        "$value": "{teal.500}",
+        "$type": "color"
+      },
+      "ink": {
+        "$value": "{teal.300}",
+        "$type": "color"
+      },
+      "wash": {
+        "$value": "{teal.900}",
+        "$type": "color"
+      },
+      "border": {
+        "$value": "{teal.800}",
+        "$type": "color"
+      }
+    },
+    "success": {
+      "base": {
+        "$value": "{jade.500}",
+        "$type": "color"
+      },
+      "ink": {
+        "$value": "{jade.300}",
+        "$type": "color"
+      },
+      "wash": {
+        "$value": "{jade.900}",
+        "$type": "color"
+      }
+    },
+    "danger": {
+      "base": {
+        "$value": "{rose.500}",
+        "$type": "color"
+      },
+      "ink": {
+        "$value": "{rose.300}",
+        "$type": "color"
+      },
+      "wash": {
+        "$value": "{rose.900}",
+        "$type": "color"
+      }
+    },
+    "warning": {
+      "base": {
+        "$value": "{amber.500}",
+        "$type": "color"
+      },
+      "ink": {
+        "$value": "{amber.300}",
+        "$type": "color"
+      },
+      "wash": {
+        "$value": "{amber.900}",
+        "$type": "color"
+      }
+    },
+    "neutral": {
+      "ink": {
+        "$value": "{slate.400}",
+        "$type": "color"
+      },
+      "wash": {
+        "$value": "{slate.900}",
+        "$type": "color"
+      }
+    },
+    "focus": {
+      "ring": {
+        "$value": "{teal.400}",
+        "$type": "color"
+      }
+    },
+    "overlay": {
+      "scrim": {
+        "$value": "{slate.1000}",
+        "$type": "color"
+      }
+    },
+    "nav": {
+      "bg": {
+        "$value": "{teal.950}",
+        "$type": "color"
+      },
+      "hover": {
+        "$value": "{teal.900}",
+        "$type": "color"
+      },
+      "active": {
+        "$value": "{teal.600}",
+        "$type": "color"
+      },
+      "text": {
+        "$value": "{teal.200}",
+        "$type": "color"
+      },
+      "text-active": {
+        "$value": "{slate.0}",
+        "$type": "color"
+      },
+      "brand": {
+        "$value": "{teal.300}",
+        "$type": "color"
+      },
+      "border": {
+        "$value": "{teal.900}",
+        "$type": "color"
+      }
+    },
+    "seg": {
+      "loyal": {
+        "$value": "{jade.500}",
+        "$type": "color"
+      },
+      "active": {
+        "$value": "{teal.500}",
+        "$type": "color"
+      },
+      "sleeping": {
+        "$value": "{amber.500}",
+        "$type": "color"
+      },
+      "pro": {
+        "$value": "{violet.500}",
+        "$type": "color"
+      },
+      "bot": {
+        "$value": "{rose.500}",
+        "$type": "color"
+      },
+      "newbie": {
+        "$value": "{azure.500}",
+        "$type": "color"
+      },
+      "loyal-wash": {
+        "$value": "{jade.900}",
+        "$type": "color"
+      },
+      "pro-wash": {
+        "$value": "{violet.900}",
+        "$type": "color"
+      },
+      "sleeping-wash": {
+        "$value": "{amber.900}",
+        "$type": "color"
+      }
+    },
+    "ink": {
+      "on-teal": {
+        "$value": "{teal.950}",
+        "$type": "color"
+      },
+      "on-teal-soft": {
+        "$value": "{teal.900}",
+        "$type": "color"
+      },
+      "on-ink": {
+        "$value": "{slate.0}",
+        "$type": "color"
+      },
+      "on-ink-soft": {
+        "$value": "{teal.200}",
+        "$type": "color"
+      }
+    },
+    "chart": {
+      "line": {
+        "$value": "{teal.300}",
+        "$type": "color"
+      }
+    }
+  }
+}

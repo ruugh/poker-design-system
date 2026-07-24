@@ -1,0 +1,13 @@
+{
+  "tokenSetOrder": [
+    "primitives",
+    "scale",
+    "typography",
+    "semantic-light",
+    "semantic-dark",
+    "elevation-light",
+    "elevation-dark",
+    "brand-royal-flush",
+    "brand-ace-high"
+  ]
+}

@@ -11,15 +11,21 @@ between what the designer sees and what ships.
 ## The chain
 
 ```
-Figma Variables ──▶ tokens/_source.json ──▶ Style Dictionary ──▶ dist/tokens.{css,ts,json}
-   (3 collections)     (export, in git)        (build)              │
-                                                                    ▼
-                                              React components ──▶ Storybook ──▶ Chromatic
-                                                     ▲
-                                          stylelint gate: 0 literals
+Figma Variables ─▶ Tokens Studio ─▶ tokens/*.json ─▶ Style Dictionary v5 ─▶ dist/tokens.{css,ts,json}
+   (3 collections)   (GitHub sync)    (DTCG set, in git)  + @tokens-studio/sd-transforms   │
+                                                                                            ▼
+                                                          React components ─▶ Storybook ─▶ Chromatic
+                                                                 ▲
+                                                     stylelint gate: 0 literals
 ```
 
-A colour change in Figma is one export + one PR. It lands in the CSS variables, the
+The source of truth is a **W3C DTCG token set** in Tokens Studio format (`tokens/`):
+per-set files (`primitives`, `scale`, `semantic-light/dark`, `typography`, brand sets),
+plus `$themes.json` (Colour scheme × Brand) and `$metadata.json`. That is exactly the
+shape the Tokens Studio Figma plugin reads and writes over its GitHub sync — so a
+designer editing a variable and pushing lands here with **no format translation**.
+
+A colour change in Figma is one sync + one PR. It lands in the CSS variables, the
 typed TS constants, the docs JSON, every component, and the deployed Storybook —
 together, or not at all.
 

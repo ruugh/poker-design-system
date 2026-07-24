@@ -1,0 +1,42 @@
+[
+  {
+    "id": "light",
+    "name": "Light",
+    "group": "Colour scheme",
+    "selectedTokenSets": {
+      "primitives": "source",
+      "scale": "source",
+      "typography": "source",
+      "semantic-light": "enabled",
+      "elevation-light": "enabled"
+    }
+  },
+  {
+    "id": "dark",
+    "name": "Dark",
+    "group": "Colour scheme",
+    "selectedTokenSets": {
+      "primitives": "source",
+      "scale": "source",
+      "typography": "source",
+      "semantic-dark": "enabled",
+      "elevation-dark": "enabled"
+    }
+  },
+  {
+    "id": "royal-flush",
+    "name": "Royal Flush",
+    "group": "Brand",
+    "selectedTokenSets": {
+      "brand-royal-flush": "enabled"
+    }
+  },
+  {
+    "id": "ace-high",
+    "name": "Ace High",
+    "group": "Brand",
+    "selectedTokenSets": {
+      "brand-ace-high": "enabled"
+    }
+  }
+]

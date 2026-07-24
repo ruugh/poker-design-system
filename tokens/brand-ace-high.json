@@ -1,0 +1,210 @@
+{
+  "color": {
+    "surface": {
+      "selected": {
+        "$value": "{plum.50}",
+        "$type": "color",
+        "$extensions": {
+          "com.poker.brandSwap": {
+            "from": "teal",
+            "to": "plum"
+          }
+        }
+      },
+      "ink": {
+        "$value": "{plum.950}",
+        "$type": "color",
+        "$extensions": {
+          "com.poker.brandSwap": {
+            "from": "teal",
+            "to": "plum"
+          }
+        }
+      }
+    },
+    "text": {
+      "on-brand": {
+        "$value": "{plum.950}",
+        "$type": "color",
+        "$extensions": {
+          "com.poker.brandSwap": {
+            "from": "teal",
+            "to": "plum"
+          }
+        }
+      }
+    },
+    "brand": {
+      "base": {
+        "$value": "{plum.600}",
+        "$type": "color",
+        "$extensions": {
+          "com.poker.brandSwap": {
+            "from": "teal",
+            "to": "plum"
+          }
+        }
+      },
+      "ink": {
+        "$value": "{plum.700}",
+        "$type": "color",
+        "$extensions": {
+          "com.poker.brandSwap": {
+            "from": "teal",
+            "to": "plum"
+          }
+        }
+      },
+      "wash": {
+        "$value": "{plum.50}",
+        "$type": "color",
+        "$extensions": {
+          "com.poker.brandSwap": {
+            "from": "teal",
+            "to": "plum"
+          }
+        }
+      },
+      "border": {
+        "$value": "{plum.200}",
+        "$type": "color",
+        "$extensions": {
+          "com.poker.brandSwap": {
+            "from": "teal",
+            "to": "plum"
+          }
+        }
+      }
+    },
+    "focus": {
+      "ring": {
+        "$value": "{plum.600}",
+        "$type": "color",
+        "$extensions": {
+          "com.poker.brandSwap": {
+            "from": "teal",
+            "to": "plum"
+          }
+        }
+      }
+    },
+    "nav": {
+      "bg": {
+        "$value": "{plum.950}",
+        "$type": "color",
+        "$extensions": {
+          "com.poker.brandSwap": {
+            "from": "teal",
+            "to": "plum"
+          }
+        }
+      },
+      "hover": {
+        "$value": "{plum.900}",
+        "$type": "color",
+        "$extensions": {
+          "com.poker.brandSwap": {
+            "from": "teal",
+            "to": "plum"
+          }
+        }
+      },
+      "active": {
+        "$value": "{plum.600}",
+        "$type": "color",
+        "$extensions": {
+          "com.poker.brandSwap": {
+            "from": "teal",
+            "to": "plum"
+          }
+        }
+      },
+      "text": {
+        "$value": "{plum.200}",
+        "$type": "color",
+        "$extensions": {
+          "com.poker.brandSwap": {
+            "from": "teal",
+            "to": "plum"
+          }
+        }
+      },
+      "brand": {
+        "$value": "{plum.300}",
+        "$type": "color",
+        "$extensions": {
+          "com.poker.brandSwap": {
+            "from": "teal",
+            "to": "plum"
+          }
+        }
+      },
+      "border": {
+        "$value": "{plum.900}",
+        "$type": "color",
+        "$extensions": {
+          "com.poker.brandSwap": {
+            "from": "teal",
+            "to": "plum"
+          }
+        }
+      }
+    },
+    "seg": {
+      "active": {
+        "$value": "{plum.600}",
+        "$type": "color",
+        "$extensions": {
+          "com.poker.brandSwap": {
+            "from": "teal",
+            "to": "plum"
+          }
+        }
+      }
+    },
+    "ink": {
+      "on-teal": {
+        "$value": "{plum.950}",
+        "$type": "color",
+        "$extensions": {
+          "com.poker.brandSwap": {
+            "from": "teal",
+            "to": "plum"
+          }
+        }
+      },
+      "on-teal-soft": {
+        "$value": "{plum.100}",
+        "$type": "color",
+        "$extensions": {
+          "com.poker.brandSwap": {
+            "from": "teal",
+            "to": "plum"
+          }
+        }
+      },
+      "on-ink-soft": {
+        "$value": "{plum.200}",
+        "$type": "color",
+        "$extensions": {
+          "com.poker.brandSwap": {
+            "from": "teal",
+            "to": "plum"
+          }
+        }
+      }
+    },
+    "chart": {
+      "line": {
+        "$value": "{plum.300}",
+        "$type": "color",
+        "$extensions": {
+          "com.poker.brandSwap": {
+            "from": "teal",
+            "to": "plum"
+          }
+        }
+      }
+    }
+  }
+}

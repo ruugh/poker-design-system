@@ -1,0 +1,248 @@
+{
+  "color": {
+    "surface": {
+      "page": {
+        "$value": "{slate.50}",
+        "$type": "color"
+      },
+      "base": {
+        "$value": "{slate.0}",
+        "$type": "color"
+      },
+      "quiet": {
+        "$value": "{slate.0}",
+        "$type": "color"
+      },
+      "raised": {
+        "$value": "{slate.0}",
+        "$type": "color"
+      },
+      "sunken": {
+        "$value": "{slate.100}",
+        "$type": "color"
+      },
+      "hover": {
+        "$value": "{slate.50}",
+        "$type": "color"
+      },
+      "selected": {
+        "$value": "{teal.50}",
+        "$type": "color"
+      },
+      "ink": {
+        "$value": "{teal.950}",
+        "$type": "color"
+      }
+    },
+    "border": {
+      "base": {
+        "$value": "{slate.200}",
+        "$type": "color"
+      },
+      "strong": {
+        "$value": "{slate.300}",
+        "$type": "color"
+      },
+      "control": {
+        "$value": "{slate.600}",
+        "$type": "color"
+      }
+    },
+    "text": {
+      "primary": {
+        "$value": "{slate.975}",
+        "$type": "color"
+      },
+      "secondary": {
+        "$value": "{slate.700}",
+        "$type": "color"
+      },
+      "muted": {
+        "$value": "{slate.500}",
+        "$type": "color"
+      },
+      "on-brand": {
+        "$value": "{slate.0}",
+        "$type": "color"
+      },
+      "inverse": {
+        "$value": "{slate.0}",
+        "$type": "color"
+      }
+    },
+    "brand": {
+      "base": {
+        "$value": "{teal.600}",
+        "$type": "color"
+      },
+      "ink": {
+        "$value": "{teal.700}",
+        "$type": "color"
+      },
+      "wash": {
+        "$value": "{teal.50}",
+        "$type": "color"
+      },
+      "border": {
+        "$value": "{teal.200}",
+        "$type": "color"
+      }
+    },
+    "success": {
+      "base": {
+        "$value": "{jade.600}",
+        "$type": "color"
+      },
+      "ink": {
+        "$value": "{jade.700}",
+        "$type": "color"
+      },
+      "wash": {
+        "$value": "{jade.50}",
+        "$type": "color"
+      }
+    },
+    "danger": {
+      "base": {
+        "$value": "{rose.600}",
+        "$type": "color"
+      },
+      "ink": {
+        "$value": "{rose.700}",
+        "$type": "color"
+      },
+      "wash": {
+        "$value": "{rose.50}",
+        "$type": "color"
+      }
+    },
+    "warning": {
+      "base": {
+        "$value": "{amber.600}",
+        "$type": "color"
+      },
+      "ink": {
+        "$value": "{amber.700}",
+        "$type": "color"
+      },
+      "wash": {
+        "$value": "{amber.50}",
+        "$type": "color"
+      }
+    },
+    "neutral": {
+      "ink": {
+        "$value": "{slate.700}",
+        "$type": "color"
+      },
+      "wash": {
+        "$value": "{slate.100}",
+        "$type": "color"
+      }
+    },
+    "focus": {
+      "ring": {
+        "$value": "{teal.600}",
+        "$type": "color"
+      }
+    },
+    "overlay": {
+      "scrim": {
+        "$value": "{slate.1000}",
+        "$type": "color"
+      }
+    },
+    "nav": {
+      "bg": {
+        "$value": "{teal.950}",
+        "$type": "color"
+      },
+      "hover": {
+        "$value": "{teal.900}",
+        "$type": "color"
+      },
+      "active": {
+        "$value": "{teal.600}",
+        "$type": "color"
+      },
+      "text": {
+        "$value": "{teal.200}",
+        "$type": "color"
+      },
+      "text-active": {
+        "$value": "{slate.0}",
+        "$type": "color"
+      },
+      "brand": {
+        "$value": "{teal.300}",
+        "$type": "color"
+      },
+      "border": {
+        "$value": "{teal.900}",
+        "$type": "color"
+      }
+    },
+    "seg": {
+      "loyal": {
+        "$value": "{jade.600}",
+        "$type": "color"
+      },
+      "active": {
+        "$value": "{teal.600}",
+        "$type": "color"
+      },
+      "sleeping": {
+        "$value": "{amber.600}",
+        "$type": "color"
+      },
+      "pro": {
+        "$value": "{violet.600}",
+        "$type": "color"
+      },
+      "bot": {
+        "$value": "{rose.600}",
+        "$type": "color"
+      },
+      "newbie": {
+        "$value": "{azure.600}",
+        "$type": "color"
+      },
+      "loyal-wash": {
+        "$value": "{jade.50}",
+        "$type": "color"
+      },
+      "pro-wash": {
+        "$value": "{violet.50}",
+        "$type": "color"
+      },
+      "sleeping-wash": {
+        "$value": "{amber.50}",
+        "$type": "color"
+      }
+    },
+    "ink": {
+      "on-teal": {
+        "$value": "{slate.0}",
+        "$type": "color"
+      },
+      "on-teal-soft": {
+        "$value": "{teal.100}",
+        "$type": "color"
+      },
+      "on-ink": {
+        "$value": "{slate.0}",
+        "$type": "color"
+      },
+      "on-ink-soft": {
+        "$value": "{teal.200}",
+        "$type": "color"
+      }
+    },
+    "chart": {
+      "line": {
+        "$value": "{teal.300}",
+        "$type": "color"
+      }
+    }
+  }
+}
