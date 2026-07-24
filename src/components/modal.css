@@ -7,19 +7,15 @@
   opacity: 0.5;
 }
 
-.pm-modal__viewport {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--pad-card);
-}
-
 .pm-modal {
-  position: relative;
-  width: 100%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - var(--space-32));
   max-width: 26rem;
+  max-height: calc(100vh - var(--space-32));
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: var(--gap-block);
@@ -28,6 +24,10 @@
   background-color: var(--color-surface-raised);
   border: 1px solid var(--color-border-base);
   box-shadow: var(--shadow-overlay);
+}
+
+.pm-modal:focus-visible {
+  outline: none;
 }
 
 .pm-modal__title {

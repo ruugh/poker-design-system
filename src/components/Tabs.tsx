@@ -1,4 +1,4 @@
-import { useId, useRef, useState } from 'react';
+import * as RadixTabs from '@radix-ui/react-tabs';
 import type { ReactNode } from 'react';
 import './tabs.css';
 
@@ -15,64 +15,28 @@ export interface TabsProps {
   'aria-label': string;
 }
 
+// Roving tabindex, arrow/Home/End navigation and tab/tabpanel aria are handled by
+// Radix Tabs. It sets aria-selected on the active trigger, which our CSS underline hooks.
 export function Tabs({ items, defaultId, 'aria-label': ariaLabel }: TabsProps) {
-  const base = useId();
-  const [active, setActive] = useState(defaultId ?? items[0]?.id);
-  const tabRefs = useRef<Record<string, HTMLButtonElement | null>>({});
-
-  const focusable = items.filter((i) => !i.disabled);
-  const onKeyDown = (e: React.KeyboardEvent) => {
-    const idx = focusable.findIndex((i) => i.id === active);
-    let next = idx;
-    if (e.key === 'ArrowRight') next = (idx + 1) % focusable.length;
-    else if (e.key === 'ArrowLeft') next = (idx - 1 + focusable.length) % focusable.length;
-    else if (e.key === 'Home') next = 0;
-    else if (e.key === 'End') next = focusable.length - 1;
-    else return;
-    e.preventDefault();
-    const id = focusable[next].id;
-    setActive(id);
-    tabRefs.current[id]?.focus();
-  };
-
   return (
-    <div>
-      <div className="pm-tabs__list" role="tablist" aria-label={ariaLabel} onKeyDown={onKeyDown}>
-        {items.map((item) => {
-          const selected = item.id === active;
-          return (
-            <button
-              key={item.id}
-              ref={(n) => {
-                tabRefs.current[item.id] = n;
-              }}
-              type="button"
-              role="tab"
-              id={`${base}-tab-${item.id}`}
-              className="pm-tab"
-              aria-selected={selected}
-              aria-controls={`${base}-panel-${item.id}`}
-              tabIndex={selected ? 0 : -1}
-              disabled={item.disabled}
-              onClick={() => setActive(item.id)}
-            >
-              {item.label}
-            </button>
-          );
-        })}
-      </div>
+    <RadixTabs.Root defaultValue={defaultId ?? items[0]?.id}>
+      <RadixTabs.List className="pm-tabs__list" aria-label={ariaLabel}>
+        {items.map((item) => (
+          <RadixTabs.Trigger
+            key={item.id}
+            value={item.id}
+            className="pm-tab"
+            disabled={item.disabled}
+          >
+            {item.label}
+          </RadixTabs.Trigger>
+        ))}
+      </RadixTabs.List>
       {items.map((item) => (
-        <div
-          key={item.id}
-          role="tabpanel"
-          id={`${base}-panel-${item.id}`}
-          aria-labelledby={`${base}-tab-${item.id}`}
-          className="pm-tabs__panel"
-          hidden={item.id !== active}
-        >
+        <RadixTabs.Content key={item.id} value={item.id} className="pm-tabs__panel">
           {item.content}
-        </div>
+        </RadixTabs.Content>
       ))}
-    </div>
+    </RadixTabs.Root>
   );
 }

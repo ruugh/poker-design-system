@@ -1,6 +1,5 @@
-import { useCallback, useEffect, useId, useRef } from 'react';
+import * as Dialog from '@radix-ui/react-dialog';
 import type { ReactNode } from 'react';
-import { createPortal } from 'react-dom';
 import './modal.css';
 
 export interface ModalProps {
@@ -12,72 +11,23 @@ export interface ModalProps {
   footer?: ReactNode;
 }
 
-const FOCUSABLE =
-  'a[href],button:not(:disabled),textarea,input,select,[tabindex]:not([tabindex="-1"])';
-
+// Focus trap, focus restore, Esc, scroll-lock and aria wiring are handled by Radix
+// Dialog — a maintained, screen-reader-tested primitive — instead of hand-rolled.
 export function Modal({ open, onClose, title, children, footer }: ModalProps) {
-  const dialogRef = useRef<HTMLDivElement>(null);
-  const restoreRef = useRef<HTMLElement | null>(null);
-  const titleId = useId();
-  const bodyId = useId();
-
-  const onKeyDown = useCallback(
-    (e: React.KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        e.stopPropagation();
-        onClose();
-        return;
-      }
-      if (e.key !== 'Tab' || !dialogRef.current) return;
-      const nodes = dialogRef.current.querySelectorAll<HTMLElement>(FOCUSABLE);
-      if (nodes.length === 0) return;
-      const first = nodes[0];
-      const last = nodes[nodes.length - 1];
-      if (e.shiftKey && document.activeElement === first) {
-        e.preventDefault();
-        last.focus();
-      } else if (!e.shiftKey && document.activeElement === last) {
-        e.preventDefault();
-        first.focus();
-      }
-    },
-    [onClose],
-  );
-
-  useEffect(() => {
-    if (!open) return;
-    restoreRef.current = document.activeElement as HTMLElement | null;
-    const node = dialogRef.current?.querySelector<HTMLElement>(FOCUSABLE) ?? dialogRef.current;
-    node?.focus();
-    return () => restoreRef.current?.focus();
-  }, [open]);
-
-  if (!open) return null;
-
-  return createPortal(
-    <div className="pm-modal__viewport">
-      <div className="pm-modal__backdrop" onClick={onClose} />
-      <div
-        ref={dialogRef}
-        className="pm-modal"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby={titleId}
-        aria-describedby={children ? bodyId : undefined}
-        tabIndex={-1}
-        onKeyDown={onKeyDown}
-      >
-        <h2 className="pm-modal__title" id={titleId}>
-          {title}
-        </h2>
-        {children && (
-          <div className="pm-modal__body" id={bodyId}>
-            {children}
-          </div>
-        )}
-        {footer && <div className="pm-modal__footer">{footer}</div>}
-      </div>
-    </div>,
-    document.body,
+  return (
+    <Dialog.Root open={open} onOpenChange={(o) => { if (!o) onClose(); }}>
+      <Dialog.Portal>
+        <Dialog.Overlay className="pm-modal__backdrop" />
+        <Dialog.Content className="pm-modal" aria-describedby={children ? undefined : ''}>
+          <Dialog.Title className="pm-modal__title">{title}</Dialog.Title>
+          {children ? (
+            <Dialog.Description asChild>
+              <div className="pm-modal__body">{children}</div>
+            </Dialog.Description>
+          ) : null}
+          {footer && <div className="pm-modal__footer">{footer}</div>}
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog.Root>
   );
 }
