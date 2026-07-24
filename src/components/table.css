@@ -1,0 +1,93 @@
+/* Table — the transactions/tables grid. Sticky quiet header, sortable columns,
+   hover + selected rows, right-aligned numerics. The deepest component in the set. */
+
+.pm-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--color-border-base);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-surface-base);
+}
+
+.pm-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+}
+
+.pm-table__th {
+  position: sticky;
+  top: 0;
+  text-align: left;
+  padding: var(--pad-cell-y) var(--pad-cell-x);
+  background-color: var(--color-surface-quiet);
+  border-bottom: 1px solid var(--color-border-base);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+.pm-table__th--num {
+  text-align: right;
+}
+
+/* sortable header button */
+.pm-table__sort {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-tight);
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+.pm-table__sort:hover {
+  color: var(--color-text-primary);
+}
+.pm-table__sort:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+.pm-table__sort[aria-sort="ascending"],
+.pm-table__sort[aria-sort="descending"] {
+  color: var(--color-brand-ink);
+}
+.pm-table__sort-icon {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+.pm-table__td {
+  padding: var(--pad-cell-y) var(--pad-cell-x);
+  border-bottom: 1px solid var(--color-border-base);
+  color: var(--color-text-primary);
+  vertical-align: middle;
+}
+.pm-table__td--num {
+  text-align: right;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+.pm-table__td--pos {
+  color: var(--color-success-ink);
+}
+.pm-table__td--neg {
+  color: var(--color-danger-ink);
+}
+
+.pm-table__row:last-child .pm-table__td {
+  border-bottom: none;
+}
+.pm-table__row:hover .pm-table__td {
+  background-color: var(--color-surface-hover);
+}
+.pm-table__row--selected .pm-table__td {
+  background-color: var(--color-surface-selected);
+}

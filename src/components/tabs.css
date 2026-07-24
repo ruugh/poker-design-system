@@ -1,0 +1,51 @@
+/* Tabs — Connected/Requests, settings sub-nav. Underline active, keyboard arrow nav. */
+
+.pm-tabs__list {
+  display: flex;
+  gap: var(--gap-block);
+  border-bottom: 1px solid var(--color-border-base);
+}
+
+.pm-tab {
+  position: relative;
+  padding: var(--pad-control) 0;
+  background: none;
+  border: none;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: color 150ms ease-out;
+}
+.pm-tab:hover {
+  color: var(--color-text-primary);
+}
+.pm-tab:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+.pm-tab[aria-selected="true"] {
+  color: var(--color-brand-ink);
+}
+.pm-tab[aria-selected="true"]::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background-color: var(--color-brand-base);
+}
+.pm-tab:disabled {
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+}
+
+.pm-tabs__panel {
+  padding: var(--pad-block) 0;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: var(--color-text-primary);
+}

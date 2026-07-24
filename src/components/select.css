@@ -1,0 +1,62 @@
+/* Select — native select styled to match Input. States: default / focus / disabled / error. */
+
+.pm-select-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-inline);
+  font-family: var(--font-sans);
+}
+.pm-select-field__label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+.pm-select {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.pm-select__input {
+  width: 100%;
+  appearance: none;
+  padding: var(--pad-control) var(--pad-card) var(--pad-control) var(--pad-block);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-control);
+  background-color: var(--color-surface-base);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  line-height: 1.4;
+  cursor: pointer;
+  transition: border-color 150ms ease-out, box-shadow 150ms ease-out;
+}
+.pm-select__input:focus {
+  outline: none;
+  border-color: var(--color-focus-ring);
+  box-shadow: 0 0 0 3px var(--color-brand-wash);
+}
+.pm-select__input:disabled {
+  background-color: var(--color-surface-sunken);
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+}
+/* chevron */
+.pm-select__chevron {
+  position: absolute;
+  right: var(--pad-block);
+  width: 0.75rem;
+  height: 0.75rem;
+  pointer-events: none;
+  color: var(--color-text-secondary);
+}
+.pm-select-field--error .pm-select__input {
+  border-color: var(--color-danger-base);
+}
+.pm-select-field__help {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+}
+.pm-select-field--error .pm-select-field__help {
+  color: var(--color-danger-ink);
+}

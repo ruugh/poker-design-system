@@ -1,0 +1,55 @@
+/* Switch — automation rules on/off. States: off / on / disabled / focus. */
+
+.pm-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-inline);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: var(--color-text-primary);
+  cursor: pointer;
+}
+.pm-switch--disabled {
+  cursor: not-allowed;
+  color: var(--color-text-muted);
+}
+
+.pm-switch__track {
+  position: relative;
+  width: 2.25rem;
+  height: 1.25rem;
+  flex: none;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-border-strong);
+  transition: background-color 150ms ease-out;
+}
+.pm-switch__input {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: inherit;
+}
+.pm-switch__thumb {
+  position: absolute;
+  top: 0.1875rem;
+  left: 0.1875rem;
+  width: 0.875rem;
+  height: 0.875rem;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-surface-base);
+  transition: transform 150ms ease-out;
+}
+.pm-switch__input:checked ~ .pm-switch__track {
+  background-color: var(--color-brand-base);
+}
+.pm-switch__input:checked ~ .pm-switch__track .pm-switch__thumb {
+  transform: translateX(1rem);
+}
+.pm-switch__input:focus-visible ~ .pm-switch__track {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+.pm-switch__input:disabled ~ .pm-switch__track {
+  background-color: var(--color-border-base);
+}

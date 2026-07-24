@@ -24,6 +24,42 @@
   cursor: not-allowed;
 }
 
+.pm-button__icon {
+  display: inline-flex;
+  width: 1rem;
+  height: 1rem;
+  flex: none;
+}
+
+/* loading: hide the label, show a spinner in its place */
+.pm-button--loading {
+  position: relative;
+  color: transparent;
+}
+.pm-button__spinner {
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid currentcolor;
+  border-top-color: transparent;
+  border-radius: var(--radius-pill);
+  animation: pm-spin 600ms linear infinite;
+}
+.pm-button--primary.pm-button--loading .pm-button__spinner,
+.pm-button--danger.pm-button--loading .pm-button__spinner {
+  color: var(--color-text-on-brand);
+}
+@keyframes pm-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pm-button__spinner {
+    animation-duration: 1500ms;
+  }
+}
+
 /* Sizes */
 .pm-button--md {
   padding: var(--pad-control) var(--pad-card);

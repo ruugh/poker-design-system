@@ -65,3 +65,28 @@ export const Sizes: Story = {
 export const LongLabel: Story = {
   args: { children: 'Approve all pending payouts for Royal Flush Club' },
 };
+
+const PlusIcon = (
+  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+    <path d="M8 3v10M3 8h10" />
+  </svg>
+);
+
+export const WithIcons: Story = {
+  render: () => (
+    <div className="pm-row">
+      <Button iconStart={PlusIcon}>Add transaction</Button>
+      <Button variant="secondary" iconStart={PlusIcon}>New club</Button>
+    </div>
+  ),
+};
+
+export const Loading: Story = {
+  render: () => (
+    <div className="pm-row">
+      <Button loading>Approve payout</Button>
+      <Button variant="secondary" loading>Export .CSV</Button>
+      <Button variant="danger" loading>Reject</Button>
+    </div>
+  ),
+};
