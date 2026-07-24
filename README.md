@@ -27,9 +27,20 @@ together, or not at all.
 
 | Layer | Where | Modes | Used by |
 |---|---|---|---|
-| **Primitive** | `slate-600`, `teal-600` | one | nobody directly — hidden from the Figma picker, forbidden in component CSS |
-| **Semantic** | `color-surface-page`, `color-text-primary` | **light / dark** | components and layouts |
+| **Primitive** | `slate-600`, `teal-600`, `plum-600` | one | nobody directly — hidden from the Figma picker, forbidden in component CSS |
+| **Semantic** | `color-surface-page`, `color-text-primary` | **light / dark** × **brand** | components and layouts |
 | **Scale** | `space-16`, `radius-lg`, `pad-card` | one | spacing, radii |
+
+### White-label: a brand axis on top of light/dark
+
+`[data-brand="plum"]` re-points every semantic token that resolves to the `teal`
+ramp onto another ramp (`plum`), keeping the step number — while neutrals and status
+colours never move. So a whole second brand identity (a different club's colours,
+down to the dark sidebar tint) is **one attribute, zero component changes**, and it
+composes with light/dark into four rendered themes. A red danger badge stays red
+under any brand; only the brand-tinted surfaces swap. Add a brand by dropping a ramp
+into `tokens/_source.json` and naming it in `brandThemes` — the override blocks are
+generated automatically.
 
 **Why modes live on the semantic layer, not the primitives.** A primitive is a fixed
 fact: `teal-600` is always `#00809C`, every theme, every platform. Themes are a
@@ -108,9 +119,22 @@ in the environment).
 - ✅ Ф2 — three collections live in Figma, type scale 17 → 12, screens migrated
 - ✅ Ф3 — Style Dictionary build, three targets, zero-hardcode gate
 - ✅ Ф4 — components (Button, Input, Card, Badge, Modal) with states
-- ✅ Ф5 — Storybook with a11y + light/dark toggle + token reference (`npm run storybook`, port 6107)
+- ✅ Ф5 — Storybook with a11y + light/dark + brand toggle + token reference (`npm run storybook`, port 6107)
 - ✅ Ф6 — GitHub Actions: build + drift gate + lint + typecheck + Storybook; Chromatic visual diff
-- ⬜ Ф7 — the loop: token change in Figma → PR → visual diff → deploy
+- ✅ Ф7 — the loop, run live: token change in Figma → PR #1 → Chromatic visual diff gate
+- ✅ Expansion — 12 components (Button, Input, Select, Checkbox, Switch, Card, Badge, Avatar, Tabs, Tooltip, Table, Modal) + white-label brand axis
+
+## Components
+
+Twelve components, each styled through semantic tokens only, with states and real
+product content. Highlights:
+
+- **Table** — compound (`Table.Head/Body/Row/Header/Cell`), sortable headers,
+  selected/hover rows, tabular numerics, sign-coloured amounts.
+- **Button** — four variants × two sizes, `loading`, icon slots.
+- **Tabs** — arrow-key roving focus, full ARIA tab/tabpanel wiring.
+- **Modal** — focus trap, Esc, `aria-modal`, scrim, portal.
+- **Input / Select** — label, hint, error state, `aria-describedby`/`aria-invalid`.
 
 ## Storybook
 
