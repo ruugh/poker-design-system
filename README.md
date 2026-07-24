@@ -94,6 +94,29 @@ rejects, in the component layer:
 `npm run lint:tokens` counts every literal and exits non-zero if any remain — the
 number the case reports. CI runs both on every PR (Ф6).
 
+## Install & use
+
+Published to GitHub Packages as `@ruugh/poker-design-system` (versioned with
+Changesets; a merge to `main` cuts the release).
+
+```bash
+npm install @ruugh/poker-design-system
+```
+
+```tsx
+import '@ruugh/poker-design-system/tokens.css'; // the CSS variables (themes)
+import '@ruugh/poker-design-system/styles.css';  // component styles
+import { Button, Modal } from '@ruugh/poker-design-system';
+import { color } from '@ruugh/poker-design-system/tokens'; // typed token constants
+
+<html data-theme="dark" data-brand="plum">
+  <Button variant="primary">Add transaction</Button>
+```
+
+`react` and `react-dom` are peers; the Radix primitives ship as dependencies. The
+bundle is ESM + CJS with type definitions, built by tsup — react and Radix stay
+external so a consumer's copies are reused.
+
 ## CI
 
 Two workflows run on every push and PR (`.github/workflows/`):

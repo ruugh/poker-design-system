@@ -1,5 +1,5 @@
 {
-  "name": "poker-design-system",
+  "name": "@ruugh/poker-design-system",
   "version": "0.1.0",
   "description": "End-to-end design system for Poker Manager — Figma variables to production code, one source of truth.",
   "type": "module",
@@ -13,9 +13,13 @@
     "build-storybook": "storybook build",
     "chromatic": "chromatic --exit-zero-on-changes",
     "verify": "npm run build:tokens && npm run lint:css && npm run lint:tokens && npm run typecheck",
-    "test": "vitest run"
+    "test": "vitest run",
+    "build": "npm run build:tokens && tsup",
+    "prepack": "npm run build",
+    "release": "changeset publish"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.31.1",
     "@storybook/addon-a11y": "^8.6.14",
     "@storybook/addon-essentials": "^8.6.14",
     "@storybook/addon-themes": "^8.6.14",
@@ -34,6 +38,7 @@
     "storybook": "^8.6.14",
     "style-dictionary": "^5.5.0",
     "stylelint": "^16.10.0",
+    "tsup": "^8.5.1",
     "typescript": "^5.9.3",
     "vite": "^5.4.21",
     "vitest": "^2.1.9"
@@ -42,5 +47,45 @@
     "@radix-ui/react-dialog": "^1.1.22",
     "@radix-ui/react-tabs": "^1.1.20",
     "@radix-ui/react-tooltip": "^1.2.15"
+  },
+  "main": "./lib/index.cjs",
+  "module": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.js",
+      "require": "./lib/index.cjs"
+    },
+    "./tokens": {
+      "types": "./lib/tokens.d.ts",
+      "import": "./lib/tokens.js",
+      "require": "./lib/tokens.cjs"
+    },
+    "./styles.css": "./lib/index.css",
+    "./tokens.css": "./dist/tokens.css"
+  },
+  "files": [
+    "lib",
+    "dist/tokens.css",
+    "dist/tokens.json"
+  ],
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ruugh/poker-design-system.git"
+  },
+  "overrides": {
+    "human-id": "^3.0.0"
   }
 }

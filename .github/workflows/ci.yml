@@ -45,5 +45,8 @@ jobs:
       - name: Behaviour tests
         run: npm test
 
+      - name: Build library (tsup)
+        run: npx tsup
+
       - name: Build Storybook
         run: npm run build-storybook

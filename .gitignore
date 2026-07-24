@@ -8,3 +8,6 @@ __pycache__/
 *.pyc
 
 # dist/ is intentionally committed — it holds the generated design tokens
+
+# library build output (built at release/prepack)
+lib/
