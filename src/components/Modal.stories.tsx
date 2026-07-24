@@ -6,6 +6,16 @@ import { Button } from './Button';
 const meta: Meta<typeof Modal> = {
   title: 'Components/Modal',
   component: Modal,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'A modal interrupts the flow to demand a consequential decision. Built on ' +
+          'Radix Dialog: focus trap, focus restore, Esc, scroll-lock and aria are handled ' +
+          'for you. See the Guidelines page for when to use it.',
+      },
+    },
+  },
 };
 export default meta;
 type Story = StoryObj<typeof Modal>;

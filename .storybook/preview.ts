@@ -13,6 +13,7 @@ const withBrand = (Story, context) => {
 };
 
 const preview: Preview = {
+  tags: ['autodocs'], // every component gets a Docs page: description + props table + stories
   parameters: {
     controls: { matchers: { color: /(background|color)$/i, date: /Date$/i } },
     backgrounds: { disable: true },

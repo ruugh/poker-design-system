@@ -4,6 +4,16 @@ import { Button } from './Button';
 const meta: Meta<typeof Button> = {
   title: 'Components/Button',
   component: Button,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'Triggers an action; the label names the result, not a generic verb. Four ' +
+          'variants (primary/secondary/ghost/danger) × two sizes, with loading and icon ' +
+          'slots. See the Guidelines page for variant choice and do/don’t.',
+      },
+    },
+  },
   args: { children: 'Add transaction', variant: 'primary', size: 'md' },
   argTypes: {
     variant: { control: 'select', options: ['primary', 'secondary', 'ghost', 'danger'] },

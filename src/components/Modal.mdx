@@ -1,0 +1,36 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Components/Modal/Guidelines" />
+
+# Modal — guidelines
+
+A modal interrupts the flow to demand a decision. Reserve it for actions that are
+**consequential or irreversible** — approving a payout, rejecting a transaction —
+not for information that could sit inline.
+
+## Do
+
+- **Do** state the decision in the title, as a question: _"Approve payout of 5,000
+  chips?"_
+- **Do** name both outcomes on the buttons: `Approve payout` / `Cancel`, never
+  `OK` / `Cancel`.
+- **Do** put the destructive choice on a `danger` button and keep the safe choice
+  as the default focus.
+- **Do** explain the consequence in the body: what happens, and whether it can be undone.
+
+## Don't
+
+- **Don't** stack modals. If a modal opens another, rethink the flow.
+- **Don't** use one for a message with no decision — that's a toast or an inline note.
+- **Don't** hide the close affordance; Esc and the scrim both dismiss.
+
+## Accessibility
+
+Built on **Radix Dialog**, so the following are handled and covered by tests:
+
+- **Focus trap** — Tab cycles within the dialog; focus moves in on open and is
+  restored to the trigger on close.
+- **Escape** closes; clicking the scrim closes.
+- **`role="dialog"`** labelled by the title and described by the body; the rest of
+  the page is inert (`aria-hidden`) while it is open.
+- Body scroll is locked underneath.

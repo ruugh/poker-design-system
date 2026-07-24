@@ -1,0 +1,39 @@
+import { Meta, Canvas, Story } from '@storybook/blocks';
+import * as ButtonStories from './Button.stories';
+
+<Meta title="Components/Button/Guidelines" />
+
+# Button — guidelines
+
+Buttons trigger an action. The label names the **result** of that action, not a
+generic verb.
+
+<Canvas of={ButtonStories.Variants} />
+
+## When to use which variant
+
+- **Primary** — the one action you most want taken on the view. Never two on a screen.
+- **Secondary** — supporting actions that sit next to primary (Export, Cancel-and-keep).
+- **Ghost** — low-emphasis actions in toolbars and dense rows.
+- **Danger** — destructive confirmation only (reject, delete). Pair it with a Modal.
+
+## Do
+
+- **Do** name the outcome: `Add transaction`, `Approve payout`, `Reject`.
+- **Do** keep one primary per view; demote the rest to secondary or ghost.
+- **Do** use `loading` for async actions — it disables the button and announces
+  `aria-busy` so a double-submit can't happen.
+
+## Don't
+
+- **Don't** write `OK`, `Submit`, or `Yes` — the label should read on its own.
+- **Don't** stack two primary buttons side by side; the eye can't pick a default.
+- **Don't** colour a destructive action as primary — use `danger`.
+
+## Accessibility
+
+- Renders a native `<button>`, so keyboard activation (Enter/Space) and focus come
+  for free. Focus shows a 2px `focus/ring` outline with offset.
+- `loading` and `disabled` both set the disabled state; `loading` adds `aria-busy`.
+- Icon-only usage must still pass an accessible name via `aria-label`.
+- The default `type="button"` prevents accidental form submission.

@@ -1,0 +1,52 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Introduction" />
+
+# Poker Manager — Design System
+
+One source of truth. Design tokens defined once in Figma reach production code
+automatically — no hand-copied hex values, no drift between what the designer sees
+and what ships.
+
+This Storybook is the code side of that chain. The design side lives in the Figma
+file (the **Design System** page mirrors these components), and the tokens flow
+between them through Tokens Studio → Style Dictionary.
+
+## How it holds together
+
+- **Tokens, not values.** Every colour, space, radius and type style is a token.
+  Components never carry a raw hex or a magic number — a stylelint gate fails the
+  build if one slips in (currently **0 literals across 416 declarations**).
+- **Three layers.** Primitive ramps (hidden from the picker) → semantic tokens
+  (`surface/base`, `text/primary`, light + dark) → the scale (`space/16`, `radius/lg`).
+  Components only ever touch the semantic layer.
+- **Themes are token modes, not forks.** Light/dark is the semantic layer switching
+  values. White-label is a second axis — `data-brand` swaps the brand ramp while
+  status colours stay put — so the two compose into four themes with zero component
+  changes. Try the **theme** and **brand** toggles in the toolbar.
+
+## Accessibility stance
+
+- Every text/background pair is checked **numerically** against WCAG 2.2 AA (4.5:1
+  body, 3:1 large/UI) on its real surface — not eyeballed. The token system ships
+  with 0 contrast failures in both themes.
+- Complex widgets (Modal, Tabs, Tooltip) are built on **Radix primitives**, so focus
+  management, keyboard navigation and ARIA are handled by a maintained, screen-reader
+  tested base rather than hand-rolled.
+- Behaviour is covered by interaction tests driving real keyboard/focus/click.
+
+## Reading a component page
+
+Each component's **Docs** tab has its description, a live props table generated from
+its TypeScript types, and every state as a story. The **Canvas** tab lets you play
+with props. Where a component has usage guidance, a **Guidelines** page sits beside it.
+
+## Contributing a token or component
+
+1. A designer edits a variable in Figma and pushes through Tokens Studio.
+2. CI rebuilds `dist/` and **fails if the committed output drifted** — the source
+   file is the only place a value can change.
+3. Chromatic diffs every component in both themes; a human accepts or rejects.
+4. Merge. The Storybook redeploys.
+
+The gate never disappears — it moves into the PR.
