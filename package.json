@@ -16,7 +16,8 @@
     "test": "vitest run",
     "build": "npm run build:tokens && tsup",
     "prepack": "npm run build",
-    "release": "changeset publish"
+    "release": "changeset publish",
+    "new:component": "node scripts/new-component.mjs"
   },
   "devDependencies": {
     "@changesets/cli": "^2.31.1",
