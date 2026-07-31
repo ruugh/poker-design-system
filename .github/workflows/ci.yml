@@ -39,6 +39,11 @@ jobs:
       - name: Hardcode metric
         run: npm run lint:tokens
 
+      # The design side of the same idea: the committed Figma component snapshot has to
+      # match what the package exports. Accepted gaps are a ratchet that can only shrink.
+      - name: Design/code parity
+        run: npm run lint:parity
+
       - name: Typecheck
         run: npm run typecheck
 

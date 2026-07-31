@@ -177,3 +177,41 @@ fields, empty). The theme toggle in the toolbar flips `data-theme` — the same
 mechanism production uses. **Foundations/Tokens** reads `dist/tokens.json` directly,
 so the token reference can't drift from what the components consume. The a11y addon
 runs axe on every story.
+
+## Design/code parity gate
+
+Tokens flow Figma → code and CI refuses to let `dist/` drift from `tokens/`. The component
+roster needs the same protection, or the Figma library and the React package quietly become
+two implementations that a human is expected to keep in step.
+
+`npm run lint:parity` compares a committed snapshot of the Figma components
+(`figma/components.json`) against what `src/index.ts` actually exports, reading the prop
+types through the TypeScript compiler rather than by pattern-matching source. It reports:
+
+- a component that exists on one side only;
+- a Figma property with no matching prop (and the reverse);
+- a variant whose options have diverged from the prop's string-literal union;
+- a property whose type no longer matches (`BOOLEAN` vs a union, and so on).
+
+**Accepted gaps are a ratchet.** `figma/parity.config.json` lists the gaps that are known
+and tolerated. An unlisted gap fails the build. A *listed* gap that has since been closed
+also fails, so the list can only ever shrink — the count is a debt number, not a mute
+button.
+
+### What it does and does not prove
+
+The Figma side is a snapshot extracted through the plugin channel
+(`figma/extract-components.js`), because neither Variables nor component metadata are
+available over REST on this plan, and Code Connect — the supported way to bind Figma
+components to code — needs an Organization or Enterprise plan. So the gate enforces *the
+committed design contract matches the code*; re-running the extractor is the deliberate act
+that surfaces a design-side change. It cannot see an unexported Figma edit, and does not
+claim to.
+
+### Current state
+
+The Figma file contains **zero** components — the design-system board and every screen are
+built from plain frames, so a designer can copy pixels out of the system but cannot assemble
+a screen from it. All 20 shipped components are therefore listed as accepted gaps. Closing
+them means building real component sets whose variant properties match the prop unions in
+the code, and deleting a line from the config each time one lands.

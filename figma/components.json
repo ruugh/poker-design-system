@@ -1,0 +1,15 @@
+{
+  "_meta": {
+    "fileKey": "GBjzMmv920DVjATJqeEenz",
+    "fileName": "Poker_new",
+    "extracted_at": "2026-08-01",
+    "extracted_with": "figma/extract-components.js via the Figma plugin channel",
+    "pages_scanned": [
+      { "id": "0:1", "name": "Page 1", "components": 0 },
+      { "id": "51:3897", "name": "PokerManager — Redesign v3", "components": 0 },
+      { "id": "135:4300", "name": "🎨 Design System", "components": 0 }
+    ],
+    "note": "Zero COMPONENT / COMPONENT_SET / INSTANCE nodes exist in the file. The design-system board and every v3 screen are built from plain frames, so a designer cannot currently assemble a screen from the system — they can only copy pixels out of it. This snapshot is the honest starting point the parity gate measures against."
+  },
+  "components": {}
+}
