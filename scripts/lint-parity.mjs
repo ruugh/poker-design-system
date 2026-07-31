@@ -156,7 +156,21 @@ function compare(figma, code, config) {
         }
         continue;
       }
-      if (def.type === 'VARIANT' && c.kind === 'variant') {
+      // A boolean prop whose effect is a fill or stroke change cannot be a Figma BOOLEAN
+      // property — those only toggle visibility. The idiom is a True/False variant axis,
+      // and it means the same thing.
+      const boolAxis =
+        def.type === 'VARIANT' &&
+        (() => {
+          const s = new Set((def.variantOptions || []).map(norm));
+          return s.size === 2 && s.has('true') && s.has('false');
+        })();
+
+      if (boolAxis) {
+        if (c.kind !== 'boolean') {
+          findings.push({ kind: 'prop-type-differs', component: name, prop, figma: 'VARIANT True/False', code: c.kind });
+        }
+      } else if (def.type === 'VARIANT' && c.kind === 'variant') {
         const fOpts = (def.variantOptions || []).map(norm).sort();
         const cOpts = c.options.map(norm).sort();
         if (fOpts.join(',') !== cOpts.join(',')) {

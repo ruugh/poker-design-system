@@ -23,14 +23,14 @@
     "This is the two media disagreeing about mechanism, not the system drifting."
   ],
   "nonPropProperties": {
-    "Button": ["state"]
+    "Button": ["state"],
+    "Input": ["state"],
+    "Select": ["state"],
+    "Checkbox": ["checked", "state"],
+    "Switch": ["checked", "state"]
   },
 
   "knownGaps": [
-    "missing-in-figma:Input",
-    "missing-in-figma:Select",
-    "missing-in-figma:Checkbox",
-    "missing-in-figma:Switch",
     "missing-in-figma:Tabs",
     "missing-in-figma:Tooltip",
     "missing-in-figma:Table",

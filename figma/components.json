@@ -5,10 +5,26 @@
     "extracted_at": "2026-08-01",
     "extracted_with": "figma/extract-components.js via the Figma plugin channel",
     "pages_scanned": [
-      { "id": "0:1", "name": "Page 1", "components": 0 },
-      { "id": "51:3897", "name": "PokerManager — Redesign v3", "components": 0 },
-      { "id": "135:4300", "name": "🎨 Design System", "components": 0 },
-      { "id": "171:3897", "name": "🧩 Components", "components": 4 }
+      {
+        "id": "0:1",
+        "name": "Page 1",
+        "components": 0
+      },
+      {
+        "id": "51:3897",
+        "name": "PokerManager — Redesign v3",
+        "components": 0
+      },
+      {
+        "id": "135:4300",
+        "name": "🎨 Design System",
+        "components": 0
+      },
+      {
+        "id": "171:3897",
+        "name": "🧩 Components",
+        "components": 8
+      }
     ],
     "note": "The design-system board and the v3 screens are still built from plain frames. Real component sets live on the 🧩 Components page, each wrapped in a labelled card that names its axes, and are being added one at a time; every one that lands removes a line from parity.config.json."
   },
@@ -19,10 +35,37 @@
       "page": "🧩 Components",
       "description": "Primary action control. variant/size/loading map 1:1 to ButtonProps; State models CSS interaction states and the native disabled attribute, which are not React props.",
       "properties": {
-        "Loading#173:0": { "type": "BOOLEAN", "defaultValue": false },
-        "Variant": { "type": "VARIANT", "variantOptions": ["Primary", "Secondary", "Ghost", "Danger"], "defaultValue": "Primary" },
-        "Size": { "type": "VARIANT", "variantOptions": ["MD", "SM"], "defaultValue": "MD" },
-        "State": { "type": "VARIANT", "variantOptions": ["Default", "Hover", "Disabled"], "defaultValue": "Default" }
+        "Loading#173:0": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
+        "Variant": {
+          "type": "VARIANT",
+          "variantOptions": [
+            "Primary",
+            "Secondary",
+            "Ghost",
+            "Danger"
+          ],
+          "defaultValue": "Primary"
+        },
+        "Size": {
+          "type": "VARIANT",
+          "variantOptions": [
+            "MD",
+            "SM"
+          ],
+          "defaultValue": "MD"
+        },
+        "State": {
+          "type": "VARIANT",
+          "variantOptions": [
+            "Default",
+            "Hover",
+            "Disabled"
+          ],
+          "defaultValue": "Default"
+        }
       }
     },
     "Badge": {
@@ -31,8 +74,21 @@
       "page": "🧩 Components",
       "description": "Status and segment tag. tone maps to BadgeTone; Dot maps to the dot prop. Wash fill + ink text, the audited pairing the tables use.",
       "properties": {
-        "Dot#183:0": { "type": "BOOLEAN", "defaultValue": true },
-        "Tone": { "type": "VARIANT", "variantOptions": ["Success", "Warning", "Danger", "Brand", "Neutral"], "defaultValue": "Success" }
+        "Dot#183:0": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "Tone": {
+          "type": "VARIANT",
+          "variantOptions": [
+            "Success",
+            "Warning",
+            "Danger",
+            "Brand",
+            "Neutral"
+          ],
+          "defaultValue": "Success"
+        }
       }
     },
     "Card": {
@@ -41,7 +97,15 @@
       "page": "🧩 Components",
       "description": "Surface for a group of related facts. Quiet is the default for peer cards (hairline, no shadow); Raised earns a shadow and means \"pay attention\"; Selected carries the brand border.",
       "properties": {
-        "Variant": { "type": "VARIANT", "variantOptions": ["Quiet", "Raised", "Selected"], "defaultValue": "Quiet" }
+        "Variant": {
+          "type": "VARIANT",
+          "variantOptions": [
+            "Quiet",
+            "Raised",
+            "Selected"
+          ],
+          "defaultValue": "Quiet"
+        }
       }
     },
     "Avatar": {
@@ -50,7 +114,123 @@
       "page": "🧩 Components",
       "description": "Player identity in tables and feeds. size maps to AvatarSize. Initials fallback; the image slot is an override, not a variant.",
       "properties": {
-        "Size": { "type": "VARIANT", "variantOptions": ["SM", "MD", "LG"], "defaultValue": "SM" }
+        "Size": {
+          "type": "VARIANT",
+          "variantOptions": [
+            "SM",
+            "MD",
+            "LG"
+          ],
+          "defaultValue": "SM"
+        }
+      }
+    },
+    "Input": {
+      "nodeId": "188:4340",
+      "type": "COMPONENT_SET",
+      "page": "🧩 Components",
+      "description": "Labelled text field. error maps to the error prop; State covers the CSS pseudo-classes and the native disabled attribute. label and hint are text overrides, not variants.",
+      "properties": {
+        "State": {
+          "type": "VARIANT",
+          "variantOptions": [
+            "Default",
+            "Hover",
+            "Focus",
+            "Disabled"
+          ],
+          "defaultValue": "Default"
+        },
+        "Error": {
+          "type": "VARIANT",
+          "variantOptions": [
+            "False",
+            "True"
+          ],
+          "defaultValue": "False"
+        }
+      }
+    },
+    "Select": {
+      "nodeId": "188:4389",
+      "type": "COMPONENT_SET",
+      "page": "🧩 Components",
+      "description": "Native select in the same field shell as Input. error maps to the error prop; State covers the CSS pseudo-classes and the native disabled attribute.",
+      "properties": {
+        "State": {
+          "type": "VARIANT",
+          "variantOptions": [
+            "Default",
+            "Hover",
+            "Focus",
+            "Disabled"
+          ],
+          "defaultValue": "Default"
+        },
+        "Error": {
+          "type": "VARIANT",
+          "variantOptions": [
+            "False",
+            "True"
+          ],
+          "defaultValue": "False"
+        }
+      }
+    },
+    "Checkbox": {
+      "nodeId": "189:4330",
+      "type": "COMPONENT_SET",
+      "page": "🧩 Components",
+      "description": "Row select and rule toggles. indeterminate maps to the prop; Checked and State model the native checked and disabled attributes. Indeterminate wins over Checked, matching the CSS cascade.",
+      "properties": {
+        "Checked": {
+          "type": "VARIANT",
+          "variantOptions": [
+            "False",
+            "True"
+          ],
+          "defaultValue": "False"
+        },
+        "Indeterminate": {
+          "type": "VARIANT",
+          "variantOptions": [
+            "False",
+            "True"
+          ],
+          "defaultValue": "False"
+        },
+        "State": {
+          "type": "VARIANT",
+          "variantOptions": [
+            "Default",
+            "Disabled"
+          ],
+          "defaultValue": "Default"
+        }
+      }
+    },
+    "Switch": {
+      "nodeId": "189:4347",
+      "type": "COMPONENT_SET",
+      "page": "🧩 Components",
+      "description": "Automation rules on and off. Checked and State model the native checked and disabled attributes; label is a text override. The thumb sits at the track edge via auto-layout alignment, not a hardcoded offset.",
+      "properties": {
+        "Checked": {
+          "type": "VARIANT",
+          "variantOptions": [
+            "False",
+            "True"
+          ],
+          "defaultValue": "False"
+        },
+        "State": {
+          "type": "VARIANT",
+          "variantOptions": [
+            "Default",
+            "Disabled"
+          ],
+          "defaultValue": "Default"
+        }
       }
     }
   }
