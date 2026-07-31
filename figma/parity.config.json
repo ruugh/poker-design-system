@@ -4,9 +4,9 @@
     "knownGaps is a ratchet, not a mute button: a listed gap does not fail the build, an",
     "unlisted one does, and a listed gap that has since been closed ALSO fails — so the",
     "list can only ever shrink. The count is the debt number this project reports.",
-    "Every entry below is the same gap: the Figma file contains zero components, so none",
-    "of the 20 shipped components can be placed on a canvas. Closing them means building",
-    "real COMPONENT_SETs whose variant properties match the prop unions in the code."
+    "Each remaining entry is a component that ships in code but cannot yet be placed on a",
+    "Figma canvas. Closing one means building a component set whose variant properties",
+    "match the prop unions in the code, then deleting its line here."
   ],
 
   "figmaFile": "GBjzMmv920DVjATJqeEenz",
@@ -27,13 +27,10 @@
   },
 
   "knownGaps": [
-    "missing-in-figma:Badge",
     "missing-in-figma:Input",
     "missing-in-figma:Select",
     "missing-in-figma:Checkbox",
     "missing-in-figma:Switch",
-    "missing-in-figma:Card",
-    "missing-in-figma:Avatar",
     "missing-in-figma:Tabs",
     "missing-in-figma:Tooltip",
     "missing-in-figma:Table",

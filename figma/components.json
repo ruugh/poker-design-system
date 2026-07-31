@@ -8,9 +8,9 @@
       { "id": "0:1", "name": "Page 1", "components": 0 },
       { "id": "51:3897", "name": "PokerManager — Redesign v3", "components": 0 },
       { "id": "135:4300", "name": "🎨 Design System", "components": 0 },
-      { "id": "171:3897", "name": "🧩 Components", "components": 1 }
+      { "id": "171:3897", "name": "🧩 Components", "components": 4 }
     ],
-    "note": "The design-system board and the v3 screens are still built from plain frames. Real component sets live on the 🧩 Components page and are being added one at a time; every one that lands removes a line from parity.config.json."
+    "note": "The design-system board and the v3 screens are still built from plain frames. Real component sets live on the 🧩 Components page, each wrapped in a labelled card that names its axes, and are being added one at a time; every one that lands removes a line from parity.config.json."
   },
   "components": {
     "Button": {
@@ -20,21 +20,37 @@
       "description": "Primary action control. variant/size/loading map 1:1 to ButtonProps; State models CSS interaction states and the native disabled attribute, which are not React props.",
       "properties": {
         "Loading#173:0": { "type": "BOOLEAN", "defaultValue": false },
-        "Variant": {
-          "type": "VARIANT",
-          "variantOptions": ["Primary", "Secondary", "Ghost", "Danger"],
-          "defaultValue": "Primary"
-        },
-        "Size": {
-          "type": "VARIANT",
-          "variantOptions": ["MD", "SM"],
-          "defaultValue": "MD"
-        },
-        "State": {
-          "type": "VARIANT",
-          "variantOptions": ["Default", "Hover", "Disabled"],
-          "defaultValue": "Default"
-        }
+        "Variant": { "type": "VARIANT", "variantOptions": ["Primary", "Secondary", "Ghost", "Danger"], "defaultValue": "Primary" },
+        "Size": { "type": "VARIANT", "variantOptions": ["MD", "SM"], "defaultValue": "MD" },
+        "State": { "type": "VARIANT", "variantOptions": ["Default", "Hover", "Disabled"], "defaultValue": "Default" }
+      }
+    },
+    "Badge": {
+      "nodeId": "183:4315",
+      "type": "COMPONENT_SET",
+      "page": "🧩 Components",
+      "description": "Status and segment tag. tone maps to BadgeTone; Dot maps to the dot prop. Wash fill + ink text, the audited pairing the tables use.",
+      "properties": {
+        "Dot#183:0": { "type": "BOOLEAN", "defaultValue": true },
+        "Tone": { "type": "VARIANT", "variantOptions": ["Success", "Warning", "Danger", "Brand", "Neutral"], "defaultValue": "Success" }
+      }
+    },
+    "Card": {
+      "nodeId": "183:4325",
+      "type": "COMPONENT_SET",
+      "page": "🧩 Components",
+      "description": "Surface for a group of related facts. Quiet is the default for peer cards (hairline, no shadow); Raised earns a shadow and means \"pay attention\"; Selected carries the brand border.",
+      "properties": {
+        "Variant": { "type": "VARIANT", "variantOptions": ["Quiet", "Raised", "Selected"], "defaultValue": "Quiet" }
+      }
+    },
+    "Avatar": {
+      "nodeId": "183:4332",
+      "type": "COMPONENT_SET",
+      "page": "🧩 Components",
+      "description": "Player identity in tables and feeds. size maps to AvatarSize. Initials fallback; the image slot is an override, not a variant.",
+      "properties": {
+        "Size": { "type": "VARIANT", "variantOptions": ["SM", "MD", "LG"], "defaultValue": "SM" }
       }
     }
   }
