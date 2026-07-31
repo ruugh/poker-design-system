@@ -37,6 +37,25 @@
   background-color: var(--color-brand-base);
   border-color: var(--color-brand-base);
 }
+
+/* Hover and press. The unchecked box borrows the field's hover treatment so a form
+   reads as one control language; the marked box steps down its own brand ramp. */
+.pm-checkbox:hover:not(.pm-checkbox--disabled) .pm-checkbox__box {
+  border-color: var(--color-text-secondary);
+}
+.pm-checkbox:active:not(.pm-checkbox--disabled) .pm-checkbox__box {
+  background-color: var(--color-surface-press);
+}
+.pm-checkbox:hover:not(.pm-checkbox--disabled) .pm-checkbox__input:checked + .pm-checkbox__box,
+.pm-checkbox:hover:not(.pm-checkbox--disabled) .pm-checkbox__input:indeterminate + .pm-checkbox__box {
+  background-color: var(--color-brand-ink);
+  border-color: var(--color-brand-ink);
+}
+.pm-checkbox:active:not(.pm-checkbox--disabled) .pm-checkbox__input:checked + .pm-checkbox__box,
+.pm-checkbox:active:not(.pm-checkbox--disabled) .pm-checkbox__input:indeterminate + .pm-checkbox__box {
+  background-color: var(--color-brand-press);
+  border-color: var(--color-brand-press);
+}
 .pm-checkbox__input:focus-visible + .pm-checkbox__box {
   outline: 2px solid var(--color-focus-ring);
   outline-offset: 2px;

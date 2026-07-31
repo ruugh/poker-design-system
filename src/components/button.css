@@ -78,6 +78,9 @@
 .pm-button--primary:hover:not(:disabled) {
   background-color: var(--color-brand-ink);
 }
+.pm-button--primary:active:not(:disabled) {
+  background-color: var(--color-brand-press);
+}
 .pm-button--primary:disabled {
   background-color: var(--color-surface-sunken);
   color: var(--color-text-muted);
@@ -91,6 +94,9 @@
 }
 .pm-button--secondary:hover:not(:disabled) {
   background-color: var(--color-surface-hover);
+}
+.pm-button--secondary:active:not(:disabled) {
+  background-color: var(--color-surface-press);
 }
 .pm-button--secondary:disabled {
   color: var(--color-text-muted);
@@ -106,6 +112,10 @@
   background-color: var(--color-surface-hover);
   color: var(--color-text-primary);
 }
+.pm-button--ghost:active:not(:disabled) {
+  background-color: var(--color-surface-press);
+  color: var(--color-text-primary);
+}
 .pm-button--ghost:disabled {
   color: var(--color-text-muted);
 }
@@ -117,6 +127,9 @@
 }
 .pm-button--danger:hover:not(:disabled) {
   background-color: var(--color-danger-ink);
+}
+.pm-button--danger:active:not(:disabled) {
+  background-color: var(--color-danger-press);
 }
 .pm-button--danger:disabled {
   background-color: var(--color-surface-sunken);

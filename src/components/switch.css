@@ -20,7 +20,10 @@
   height: 1.25rem;
   flex: none;
   border-radius: var(--radius-pill);
-  background-color: var(--color-border-strong);
+  /* border/control, not border/strong: the track is the control's visible boundary and
+     owes 3:1. border/strong measured 1.68 in light and 1.62 in dark — an off switch was
+     very nearly invisible. */
+  background-color: var(--color-border-control);
   transition: background-color 150ms ease-out;
 }
 .pm-switch__input {
@@ -42,6 +45,22 @@
 }
 .pm-switch__input:checked ~ .pm-switch__track {
   background-color: var(--color-brand-base);
+}
+
+/* Hover and press. Off steps border/control -> text/secondary -> text/primary, which
+   reads as "more prominent" in both themes — darker in light, lighter in dark — and every
+   step clears 3:1 against the surface behind it. */
+.pm-switch:hover:not(.pm-switch--disabled) .pm-switch__track {
+  background-color: var(--color-text-secondary);
+}
+.pm-switch:active:not(.pm-switch--disabled) .pm-switch__track {
+  background-color: var(--color-text-primary);
+}
+.pm-switch:hover:not(.pm-switch--disabled) .pm-switch__input:checked ~ .pm-switch__track {
+  background-color: var(--color-brand-ink);
+}
+.pm-switch:active:not(.pm-switch--disabled) .pm-switch__input:checked ~ .pm-switch__track {
+  background-color: var(--color-brand-press);
 }
 .pm-switch__input:checked ~ .pm-switch__track .pm-switch__thumb {
   transform: translateX(1rem);

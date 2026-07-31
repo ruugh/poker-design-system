@@ -108,6 +108,7 @@
   --color-surface-hover: var(--slate-50);
   --color-surface-selected: var(--teal-50);
   --color-surface-ink: var(--teal-950);
+  --color-surface-press: var(--slate-100);
   --color-border-base: var(--slate-200);
   --color-border-strong: var(--slate-300);
   --color-border-control: var(--slate-600);
@@ -120,12 +121,14 @@
   --color-brand-ink: var(--teal-700);
   --color-brand-wash: var(--teal-50);
   --color-brand-border: var(--teal-200);
+  --color-brand-press: var(--teal-800);
   --color-success-base: var(--jade-600);
   --color-success-ink: var(--jade-700);
   --color-success-wash: var(--jade-50);
   --color-danger-base: var(--rose-600);
   --color-danger-ink: var(--rose-700);
   --color-danger-wash: var(--rose-50);
+  --color-danger-press: var(--rose-800);
   --color-warning-base: var(--amber-600);
   --color-warning-ink: var(--amber-700);
   --color-warning-wash: var(--amber-50);
@@ -193,6 +196,7 @@
   --color-surface-hover: var(--slate-900);
   --color-surface-selected: var(--teal-900);
   --color-surface-ink: var(--teal-950);
+  --color-surface-press: var(--slate-850);
   --color-border-base: var(--slate-850);
   --color-border-strong: var(--slate-800);
   --color-border-control: var(--slate-600);
@@ -205,12 +209,14 @@
   --color-brand-ink: var(--teal-300);
   --color-brand-wash: var(--teal-900);
   --color-brand-border: var(--teal-800);
+  --color-brand-press: var(--teal-200);
   --color-success-base: var(--jade-500);
   --color-success-ink: var(--jade-300);
   --color-success-wash: var(--jade-900);
   --color-danger-base: var(--rose-500);
   --color-danger-ink: var(--rose-300);
   --color-danger-wash: var(--rose-900);
+  --color-danger-press: var(--rose-200);
   --color-warning-base: var(--amber-500);
   --color-warning-ink: var(--amber-300);
   --color-warning-wash: var(--amber-900);

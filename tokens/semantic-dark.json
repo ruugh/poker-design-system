@@ -32,6 +32,10 @@
       "ink": {
         "$value": "{teal.950}",
         "$type": "color"
+      },
+      "press": {
+        "$value": "{slate.850}",
+        "$type": "color"
       }
     },
     "border": {
@@ -86,6 +90,10 @@
       "border": {
         "$value": "{teal.800}",
         "$type": "color"
+      },
+      "press": {
+        "$value": "{teal.200}",
+        "$type": "color"
       }
     },
     "success": {
@@ -113,6 +121,10 @@
       },
       "wash": {
         "$value": "{rose.900}",
+        "$type": "color"
+      },
+      "press": {
+        "$value": "{rose.200}",
         "$type": "color"
       }
     },
