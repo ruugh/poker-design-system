@@ -16,8 +16,17 @@
 
   "propAliases": {},
 
+  "$nonPropProperties": [
+    "Figma properties that legitimately have no React prop. `state` is a variant axis",
+    "because Hover and Disabled change fills, and Figma cannot express a fill change as a",
+    "boolean — but in code they are a CSS pseudo-class and a native button attribute.",
+    "This is the two media disagreeing about mechanism, not the system drifting."
+  ],
+  "nonPropProperties": {
+    "Button": ["state"]
+  },
+
   "knownGaps": [
-    "missing-in-figma:Button",
     "missing-in-figma:Badge",
     "missing-in-figma:Input",
     "missing-in-figma:Select",

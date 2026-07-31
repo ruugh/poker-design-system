@@ -7,9 +7,35 @@
     "pages_scanned": [
       { "id": "0:1", "name": "Page 1", "components": 0 },
       { "id": "51:3897", "name": "PokerManager — Redesign v3", "components": 0 },
-      { "id": "135:4300", "name": "🎨 Design System", "components": 0 }
+      { "id": "135:4300", "name": "🎨 Design System", "components": 0 },
+      { "id": "171:3897", "name": "🧩 Components", "components": 1 }
     ],
-    "note": "Zero COMPONENT / COMPONENT_SET / INSTANCE nodes exist in the file. The design-system board and every v3 screen are built from plain frames, so a designer cannot currently assemble a screen from the system — they can only copy pixels out of it. This snapshot is the honest starting point the parity gate measures against."
+    "note": "The design-system board and the v3 screens are still built from plain frames. Real component sets live on the 🧩 Components page and are being added one at a time; every one that lands removes a line from parity.config.json."
   },
-  "components": {}
+  "components": {
+    "Button": {
+      "nodeId": "172:4369",
+      "type": "COMPONENT_SET",
+      "page": "🧩 Components",
+      "description": "Primary action control. variant/size/loading map 1:1 to ButtonProps; State models CSS interaction states and the native disabled attribute, which are not React props.",
+      "properties": {
+        "Loading#173:0": { "type": "BOOLEAN", "defaultValue": false },
+        "Variant": {
+          "type": "VARIANT",
+          "variantOptions": ["Primary", "Secondary", "Ghost", "Danger"],
+          "defaultValue": "Primary"
+        },
+        "Size": {
+          "type": "VARIANT",
+          "variantOptions": ["MD", "SM"],
+          "defaultValue": "MD"
+        },
+        "State": {
+          "type": "VARIANT",
+          "variantOptions": ["Default", "Hover", "Disabled"],
+          "defaultValue": "Default"
+        }
+      }
+    }
+  }
 }

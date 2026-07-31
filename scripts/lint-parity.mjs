@@ -73,9 +73,14 @@ function readCodeSide() {
   const moduleExports = checker.getExportsOfModule(moduleSymbol);
   const byName = new Map(moduleExports.map((s) => [s.getName(), s]));
 
+  // The barrel re-exports, so every symbol here is an alias whose own declaration is the
+  // ExportSpecifier, not the interface. Resolve through it or every props type reads as
+  // empty and the gate silently compares nothing.
+  const deref = (s) => (s && s.flags & ts.SymbolFlags.Alias ? checker.getAliasedSymbol(s) : s);
+
   const components = {};
   for (const name of exported) {
-    const propsSymbol = byName.get(`${name}Props`);
+    const propsSymbol = deref(byName.get(`${name}Props`));
     const props = {};
 
     const decl = propsSymbol?.declarations?.find(ts.isInterfaceDeclaration);
@@ -109,6 +114,13 @@ function compare(figma, code, config) {
   const aliases = config.propAliases || {};
   const ignoreCodeOnly = new Set(config.ignoreCodeOnly || []);
   const ignoreFigmaOnly = new Set(config.ignoreFigmaOnly || []);
+  // Figma properties that legitimately have no code prop. Two kinds, both real:
+  //   - interaction state (Hover, Pressed, Focus) — a CSS pseudo-class, never a prop;
+  //   - native element attributes (`disabled`, `required`) — inherited from
+  //     ButtonHTMLAttributes and friends, so absent from the component's own props.
+  // Figma has to model both as variant axes because they change fills. That is the two
+  // media disagreeing about mechanism, not the system drifting.
+  const nonPropProperties = config.nonPropProperties || {};
   const findings = [];
 
   const codeNames = Object.keys(code).filter((n) => !ignoreCodeOnly.has(n));
@@ -134,10 +146,14 @@ function compare(figma, code, config) {
       figmaProps[alias[bare] || toPropName(bare)] = { raw: bare, ...def };
     }
 
+    const native = new Set(nonPropProperties[name] || []);
+
     for (const [prop, def] of Object.entries(figmaProps)) {
       const c = codeProps[prop];
       if (!c) {
-        findings.push({ kind: 'prop-missing-in-code', component: name, prop, figmaProp: def.raw });
+        if (!native.has(prop)) {
+          findings.push({ kind: 'prop-missing-in-code', component: name, prop, figmaProp: def.raw });
+        }
         continue;
       }
       if (def.type === 'VARIANT' && c.kind === 'variant') {
