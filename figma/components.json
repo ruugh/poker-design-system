@@ -26,7 +26,7 @@
         "components": 8
       }
     ],
-    "note": "The design-system board and the v3 screens are still built from plain frames. Real component sets live on the 🧩 Components page, each wrapped in a labelled card that names its axes, and are being added one at a time; every one that lands removes a line from parity.config.json."
+    "note": "The design-system board and the v3 screens are still built from plain frames. Real component sets live on the 🧩 Components page, each wrapped in a labelled card naming its axes. Interactive controls carry the canonical set default/hover/pressed/focus/disabled."
   },
   "components": {
     "Button": {
@@ -62,11 +62,14 @@
           "variantOptions": [
             "Default",
             "Hover",
+            "Pressed",
+            "Focus",
             "Disabled"
           ],
           "defaultValue": "Default"
         }
-      }
+      },
+      "variants": 40
     },
     "Badge": {
       "nodeId": "183:4315",
@@ -89,7 +92,8 @@
           ],
           "defaultValue": "Success"
         }
-      }
+      },
+      "variants": 5
     },
     "Card": {
       "nodeId": "183:4325",
@@ -106,7 +110,8 @@
           ],
           "defaultValue": "Quiet"
         }
-      }
+      },
+      "variants": 3
     },
     "Avatar": {
       "nodeId": "183:4332",
@@ -123,7 +128,8 @@
           ],
           "defaultValue": "SM"
         }
-      }
+      },
+      "variants": 3
     },
     "Input": {
       "nodeId": "188:4340",
@@ -149,7 +155,8 @@
           ],
           "defaultValue": "False"
         }
-      }
+      },
+      "variants": 8
     },
     "Select": {
       "nodeId": "188:4389",
@@ -175,7 +182,8 @@
           ],
           "defaultValue": "False"
         }
-      }
+      },
+      "variants": 8
     },
     "Checkbox": {
       "nodeId": "189:4330",
@@ -203,11 +211,15 @@
           "type": "VARIANT",
           "variantOptions": [
             "Default",
+            "Hover",
+            "Pressed",
+            "Focus",
             "Disabled"
           ],
           "defaultValue": "Default"
         }
-      }
+      },
+      "variants": 20
     },
     "Switch": {
       "nodeId": "189:4347",
@@ -227,11 +239,15 @@
           "type": "VARIANT",
           "variantOptions": [
             "Default",
+            "Hover",
+            "Pressed",
+            "Focus",
             "Disabled"
           ],
           "defaultValue": "Default"
         }
-      }
+      },
+      "variants": 10
     }
   }
 }
