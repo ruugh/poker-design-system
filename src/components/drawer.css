@@ -1,0 +1,120 @@
+/* Drawer — full-height edge sheet. Header and footer hold their ground; only the
+   body scrolls, so the action row never drifts out of reach on a long form. */
+
+.pm-drawer__backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: var(--color-overlay-scrim);
+  opacity: 0.5;
+}
+
+.pm-drawer {
+  position: fixed;
+  inset-block: 0;
+  display: flex;
+  flex-direction: column;
+  inline-size: calc(100% - var(--space-32));
+  background-color: var(--color-surface-raised);
+  box-shadow: var(--shadow-overlay);
+}
+
+.pm-drawer--right {
+  inset-inline-end: 0;
+  border-inline-start: 1px solid var(--color-border-base);
+}
+
+.pm-drawer--left {
+  inset-inline-start: 0;
+  border-inline-end: 1px solid var(--color-border-base);
+}
+
+/* Sizes — a cap, not a width; narrow viewports still get the inset above. */
+.pm-drawer--sm {
+  max-inline-size: 20rem;
+}
+.pm-drawer--md {
+  max-inline-size: 28rem;
+}
+.pm-drawer--lg {
+  max-inline-size: 40rem;
+}
+
+.pm-drawer:focus-visible {
+  outline: none;
+}
+
+.pm-drawer__header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--gap-inline);
+  padding: var(--pad-card);
+  border-bottom: 1px solid var(--color-border-base);
+}
+
+.pm-drawer__heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-tight);
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.pm-drawer__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1.4;
+  color: var(--color-text-primary);
+}
+
+.pm-drawer__description {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+
+.pm-drawer__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  inline-size: var(--space-40);
+  block-size: var(--space-40);
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+}
+
+.pm-drawer__close:hover {
+  background-color: var(--color-surface-hover);
+  color: var(--color-text-primary);
+}
+
+.pm-drawer__close:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 0.1875rem var(--color-focus-ring);
+}
+
+.pm-drawer__body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: var(--pad-card);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--color-text-primary);
+}
+
+.pm-drawer__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--gap-inline);
+  padding: var(--pad-card);
+  border-top: 1px solid var(--color-border-base);
+}

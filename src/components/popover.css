@@ -1,0 +1,24 @@
+/* Popover — anchored working surface. Raised elevation plus a hairline border, so it
+   still reads as lifted in dark mode where the shadow all but disappears. */
+
+.pm-popover {
+  z-index: 50;
+  max-inline-size: 20rem;
+  padding: var(--pad-block);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border-base);
+  background-color: var(--color-surface-raised);
+  box-shadow: var(--shadow-overlay);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--color-text-primary);
+}
+
+.pm-popover:focus-visible {
+  outline: none;
+}
+
+.pm-popover__arrow {
+  fill: var(--color-surface-raised);
+}

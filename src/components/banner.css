@@ -1,0 +1,92 @@
+/* Banner — in-flow message block. Wash fill + ink text, the same audited pairing the
+   status tags use, so a banner never invents a colour the table does not already have. */
+
+.pm-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--gap-inline);
+  padding: var(--pad-block);
+  border-radius: var(--radius-lg);
+  font-family: var(--font-sans);
+}
+
+.pm-banner__dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-top: var(--space-4);
+  border-radius: var(--radius-pill);
+  background-color: currentcolor;
+  flex: none;
+}
+
+.pm-banner__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-tight);
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.pm-banner__title {
+  margin: 0;
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: inherit;
+}
+
+/* The remedy line steps down in weight, not in contrast — secondary still clears AA. */
+.pm-banner__body {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+
+.pm-banner__action {
+  flex: none;
+}
+
+.pm-banner__dismiss {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  /* The glyph is 16px; the hit area is not. */
+  width: var(--space-32);
+  height: var(--space-32);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.pm-banner__dismiss:hover {
+  background-color: var(--color-surface-hover);
+}
+
+.pm-banner__dismiss:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 0.1875rem var(--color-focus-ring);
+}
+
+/* Tones */
+.pm-banner--info {
+  background-color: var(--color-brand-wash);
+  color: var(--color-brand-ink);
+}
+.pm-banner--success {
+  background-color: var(--color-success-wash);
+  color: var(--color-success-ink);
+}
+.pm-banner--warning {
+  background-color: var(--color-warning-wash);
+  color: var(--color-warning-ink);
+}
+.pm-banner--danger {
+  background-color: var(--color-danger-wash);
+  color: var(--color-danger-ink);
+}

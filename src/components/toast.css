@@ -1,0 +1,154 @@
+/* Toast — transient confirmation, stacked bottom-right. Raised surface with a tone dot
+   rather than a tone-flooded card: the same colour language the Banner and tags use. */
+
+.pm-toast__viewport {
+  position: fixed;
+  inset-block-end: 0;
+  inset-inline-end: 0;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-inline);
+  inline-size: 24rem;
+  max-inline-size: 100vw;
+  padding: var(--pad-block);
+  margin: 0;
+  list-style: none;
+  outline: none;
+}
+
+.pm-toast {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--gap-inline);
+  padding: var(--pad-block);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border-base);
+  background-color: var(--color-surface-raised);
+  box-shadow: var(--shadow-overlay);
+  font-family: var(--font-sans);
+}
+
+.pm-toast__dot {
+  inline-size: 0.5rem;
+  block-size: 0.5rem;
+  margin-block-start: var(--space-4);
+  border-radius: var(--radius-pill);
+  flex: none;
+  background-color: var(--color-brand-base);
+}
+
+.pm-toast--success .pm-toast__dot {
+  background-color: var(--color-success-base);
+}
+.pm-toast--danger .pm-toast__dot {
+  background-color: var(--color-danger-base);
+}
+
+.pm-toast__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-tight);
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.pm-toast__title {
+  margin: 0;
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--color-text-primary);
+}
+
+.pm-toast__body {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+
+.pm-toast__action {
+  flex: none;
+  padding: var(--space-4) var(--space-8);
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: none;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--color-brand-ink);
+  cursor: pointer;
+}
+
+.pm-toast__action:hover {
+  background-color: var(--color-brand-wash);
+}
+
+.pm-toast__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  /* Same 32px hit area as the Banner dismiss — the glyph is 16px, the target is not.
+     A toast dismisses itself on a timer, so a missed click costs the user the message. */
+  inline-size: var(--space-32);
+  block-size: var(--space-32);
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+}
+
+.pm-toast__close:hover {
+  background-color: var(--color-surface-hover);
+  color: var(--color-text-primary);
+}
+
+.pm-toast__action:focus-visible,
+.pm-toast__close:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 0.1875rem var(--color-focus-ring);
+}
+
+/* Enter from the edge it lives on; leave by the same path. */
+.pm-toast[data-state='open'] {
+  animation: pm-toast-in 200ms ease-out;
+}
+
+.pm-toast[data-state='closed'] {
+  animation: pm-toast-out 150ms ease-in;
+}
+
+.pm-toast[data-swipe='move'] {
+  transform: translateX(var(--radix-toast-swipe-move-x));
+}
+
+.pm-toast[data-swipe='end'] {
+  animation: pm-toast-out 150ms ease-in;
+}
+
+@keyframes pm-toast-in {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+@keyframes pm-toast-out {
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pm-toast[data-state='open'],
+  .pm-toast[data-state='closed'],
+  .pm-toast[data-swipe='end'] {
+    animation: none;
+  }
+}

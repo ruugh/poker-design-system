@@ -1,0 +1,51 @@
+/* Spinner — indeterminate wait.
+   Declares pm-spin itself so importing Spinner alone is enough; button.css carries an
+   identical declaration for its inline spinner. */
+
+@keyframes pm-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.pm-spinner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-brand-base);
+}
+
+.pm-spinner__ring {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-pill);
+  border: 0.125rem solid currentcolor;
+  border-top-color: transparent;
+  animation: pm-spin 700ms linear infinite;
+}
+
+/* Sizes — the ring grows, the stroke stays optically even. */
+.pm-spinner--sm {
+  width: var(--space-16);
+  height: var(--space-16);
+}
+.pm-spinner--md {
+  width: var(--space-20);
+  height: var(--space-20);
+}
+.pm-spinner--lg {
+  width: var(--space-32);
+  height: var(--space-32);
+}
+.pm-spinner--lg .pm-spinner__ring {
+  border-width: 0.1875rem;
+}
+
+/* Motion is a signal, not decoration — slow it right down rather than freezing it,
+   so "still working" stays legible to someone who asked for less movement. */
+@media (prefers-reduced-motion: reduce) {
+  .pm-spinner__ring {
+    animation-duration: 1500ms;
+  }
+}

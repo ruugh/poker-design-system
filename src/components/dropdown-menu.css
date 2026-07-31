@@ -1,0 +1,90 @@
+/* DropdownMenu — actions on a thing. Items are a quiet list; only the highlighted row
+   lifts, so the open menu has exactly one focal point. */
+
+.pm-menu {
+  z-index: 50;
+  min-inline-size: 12rem;
+  /* Without a cap the panel just grows to fit its longest item and the ellipsis below
+     never engages — the menu ends up wider than the row it belongs to. */
+  max-inline-size: 20rem;
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border-base);
+  background-color: var(--color-surface-raised);
+  box-shadow: var(--shadow-overlay);
+  font-family: var(--font-sans);
+}
+
+.pm-menu:focus-visible {
+  outline: none;
+}
+
+.pm-menu__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap-block);
+  /* 37px tall at the default font size — above the 32px desktop click-target floor,
+     and dense enough for a row menu that opens over a table. */
+  padding: var(--space-8) var(--space-12);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+}
+
+/* Radix drives this attribute for both pointer hover and keyboard focus, so one rule
+   covers both and the two can never disagree. */
+.pm-menu__item[data-highlighted] {
+  background-color: var(--color-surface-hover);
+}
+
+/* A disabled item usually says why it is disabled, and an unreadable reason is worse
+   than no reason. WCAG exempts inactive controls from the contrast floor; we decline the
+   exemption and keep `secondary` (5.7:1) instead of `muted` (3.0:1). The item still reads
+   as unavailable — it never highlights, and the cursor says so. */
+.pm-menu__item[data-disabled] {
+  color: var(--color-text-secondary);
+  cursor: not-allowed;
+}
+
+.pm-menu__item--danger {
+  color: var(--color-danger-ink);
+}
+
+.pm-menu__item--danger[data-highlighted] {
+  background-color: var(--color-danger-wash);
+}
+
+.pm-menu__label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pm-menu__shortcut {
+  flex: none;
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-secondary);
+}
+
+.pm-menu__group-label {
+  padding: var(--space-8) var(--space-12) var(--space-4);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+.pm-menu__separator {
+  block-size: 1px;
+  margin: var(--space-4) 0;
+  background-color: var(--color-border-base);
+}

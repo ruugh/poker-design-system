@@ -1,0 +1,80 @@
+/* ProgressBar — determinate by default. The track is a recessed surface, the fill
+   carries the tone, so the pair reads as depth rather than as two competing colours. */
+
+.pm-progress {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-tight);
+  font-family: var(--font-sans);
+}
+
+.pm-progress__meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--gap-inline);
+}
+
+.pm-progress__label {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--color-text-primary);
+}
+
+.pm-progress__value {
+  font-size: 0.75rem;
+  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-secondary);
+}
+
+.pm-progress__track {
+  position: relative;
+  overflow: hidden;
+  block-size: var(--space-8);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-surface-sunken);
+}
+
+.pm-progress__fill {
+  block-size: 100%;
+  inline-size: 0;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-brand-base);
+  transition: inline-size 200ms ease-out;
+}
+
+/* Tones — the fill is a graphic, so it answers to the 3:1 threshold, not 4.5. */
+.pm-progress--success .pm-progress__fill {
+  background-color: var(--color-success-base);
+}
+.pm-progress--warning .pm-progress__fill {
+  background-color: var(--color-warning-base);
+}
+.pm-progress--danger .pm-progress__fill {
+  background-color: var(--color-danger-base);
+}
+
+/* Indeterminate — a travelling segment, never a filled bar claiming false progress. */
+.pm-progress--indeterminate .pm-progress__fill {
+  inline-size: 40%;
+  animation: pm-progress-slide 1200ms ease-in-out infinite;
+}
+
+@keyframes pm-progress-slide {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(250%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pm-progress__fill {
+    transition: none;
+  }
+  .pm-progress--indeterminate .pm-progress__fill {
+    animation-duration: 2400ms;
+  }
+}
