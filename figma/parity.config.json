@@ -15,11 +15,13 @@
   "ignoreFigmaOnly": [],
   "propAliases": {},
   "$nonPropProperties": [
-    "Figma properties that legitimately have no React prop. state is a variant axis because",
-    "Hover and Disabled change fills, and Figma cannot express a fill change as a boolean —",
-    "but in code they are a CSS pseudo-class and a native attribute. content is placeholder",
-    "vs value, which in code is simply whether the field has text in it. This is the two",
-    "media disagreeing about mechanism, not the system drifting."
+    "Figma properties that legitimately have no React prop.",
+    "state is a variant axis because Hover and Disabled change fills, and Figma cannot",
+    "express a fill change as a boolean — in code they are a CSS pseudo-class or a native",
+    "attribute. content is placeholder vs value, which in code is just whether the field",
+    "holds text. dismissible and action are the presence of an optional prop (onDismiss,",
+    "action) rendered as a slot toggle, because a designer needs to see both shapes.",
+    "This is the two media disagreeing about mechanism, not the system drifting."
   ],
   "nonPropProperties": {
     "Button": [
@@ -40,23 +42,36 @@
     "Switch": [
       "checked",
       "state"
+    ],
+    "ProgressBar": [
+      "state"
+    ],
+    "Banner": [
+      "dismissible"
+    ],
+    "Toast": [
+      "action"
     ]
   },
-  "knownGaps": [
-    "missing-in-figma:Tooltip",
-    "missing-in-figma:Modal",
-    "missing-in-figma:Banner",
-    "missing-in-figma:Spinner",
-    "missing-in-figma:ProgressBar",
-    "missing-in-figma:Skeleton",
-    "missing-in-figma:Drawer",
-    "missing-in-figma:Popover",
-    "missing-in-figma:Toast"
-  ],
+  "knownGaps": [],
   "nonVariantProps": {
     "DropdownMenu": [
       "align",
       "side"
+    ],
+    "Popover": [
+      "align",
+      "side",
+      "open"
+    ],
+    "Modal": [
+      "open"
+    ],
+    "Drawer": [
+      "open"
+    ],
+    "Toast": [
+      "open"
     ]
   },
   "$nonVariantProps": [

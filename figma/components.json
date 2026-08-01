@@ -23,10 +23,11 @@
       {
         "id": "171:3897",
         "name": "🧩 Components",
-        "components": 15
+        "components": 24
       }
     ],
-    "note": "The design-system board and the v3 screens are still built from plain frames. Real component sets live on the 🧩 Components page. A slash namespaces a Figma sub-part (Tabs / Tab, Table / Row) — the canvas equivalent of a compound child in code, which is why it pairs with no prop. Interactive controls carry the canonical set default/hover/pressed/focus/disabled."
+    "note": "The design-system board and the v3 screens are still built from plain frames. Real component sets live on the 🧩 Components page. A slash namespaces a Figma sub-part (Tabs / Tab, Table / Row) — the canvas equivalent of a compound child in code, which is why it pairs with no prop. Interactive controls carry the canonical set default/hover/pressed/focus/disabled.",
+    "total_variants": 170
   },
   "components": {
     "Button": {
@@ -386,6 +387,168 @@
       "variants": 1,
       "description": "Transactions and tables grid. Compose from Table / Header cell and Table / Row instances. The code is compound — Table.Head, Table.Row, Table.Cell — and these sub-parts are the canvas equivalent.",
       "properties": {},
+      "page": "🧩 Components"
+    },
+    "Banner": {
+      "nodeId": "222:4448",
+      "type": "COMPONENT_SET",
+      "variants": 4,
+      "description": "In-flow message. tone maps to BannerTone. Warning and Danger take role=alert in code and interrupt the screen reader; Info and Success take role=status and wait their turn — the tone is the whole signal, so it is the only axis.",
+      "properties": {
+        "Dismissible#222:0": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "Tone": {
+          "type": "VARIANT",
+          "variantOptions": [
+            "Info",
+            "Success",
+            "Warning",
+            "Danger"
+          ],
+          "defaultValue": "Info"
+        }
+      },
+      "page": "🧩 Components"
+    },
+    "Toast": {
+      "nodeId": "222:4476",
+      "type": "COMPONENT_SET",
+      "variants": 3,
+      "description": "Transient confirmation, named after the action that caused it. tone maps to ToastTone; Action toggles the single recovery control. open is controlled, so it is not an axis.",
+      "properties": {
+        "Action#222:5": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "Tone": {
+          "type": "VARIANT",
+          "variantOptions": [
+            "Info",
+            "Success",
+            "Danger"
+          ],
+          "defaultValue": "Info"
+        }
+      },
+      "page": "🧩 Components"
+    },
+    "ProgressBar": {
+      "nodeId": "222:4525",
+      "type": "COMPONENT_SET",
+      "variants": 8,
+      "description": "tone maps to ProgressTone; ShowValue maps to showValue. State is Figma-only: an omitted value makes the bar indeterminate in code, so there is no prop to pair with.",
+      "properties": {
+        "ShowValue#222:9": {
+          "type": "BOOLEAN",
+          "defaultValue": true
+        },
+        "Tone": {
+          "type": "VARIANT",
+          "variantOptions": [
+            "Brand",
+            "Success",
+            "Warning",
+            "Danger"
+          ],
+          "defaultValue": "Brand"
+        },
+        "State": {
+          "type": "VARIANT",
+          "variantOptions": [
+            "Determinate",
+            "Indeterminate"
+          ],
+          "defaultValue": "Determinate"
+        }
+      },
+      "page": "🧩 Components"
+    },
+    "Modal": {
+      "nodeId": "226:4420",
+      "type": "COMPONENT",
+      "variants": 1,
+      "description": "Centred decision over a scrim. open is controlled, not a variant. Focus trap, Esc and aria-modal come from Radix Dialog.",
+      "properties": {},
+      "page": "🧩 Components"
+    },
+    "Drawer": {
+      "nodeId": "226:4494",
+      "type": "COMPONENT_SET",
+      "variants": 6,
+      "description": "Edge sheet for a task that needs room but not a page. side and size map to props of the same name; open is controlled. Shown at a representative height rather than full viewport.",
+      "properties": {
+        "Side": {
+          "type": "VARIANT",
+          "variantOptions": [
+            "Right",
+            "Left"
+          ],
+          "defaultValue": "Right"
+        },
+        "Size": {
+          "type": "VARIANT",
+          "variantOptions": [
+            "SM",
+            "MD",
+            "LG"
+          ],
+          "defaultValue": "SM"
+        }
+      },
+      "page": "🧩 Components"
+    },
+    "Popover": {
+      "nodeId": "226:4495",
+      "type": "COMPONENT",
+      "variants": 1,
+      "description": "Anchored working surface. Tooltip is a label you read; Popover takes focus and can hold controls. side, align and open are Radix placement and state props.",
+      "properties": {},
+      "page": "🧩 Components"
+    },
+    "Tooltip": {
+      "nodeId": "226:4497",
+      "type": "COMPONENT",
+      "variants": 1,
+      "description": "Hover and focus hint on an ink surface. label is a string and delayDuration a number, so neither is a variant.",
+      "properties": {},
+      "page": "🧩 Components"
+    },
+    "Spinner": {
+      "nodeId": "226:4505",
+      "type": "COMPONENT_SET",
+      "variants": 3,
+      "description": "Indeterminate wait. size maps to SpinnerSize. When the proportion is known use ProgressBar instead.",
+      "properties": {
+        "Size": {
+          "type": "VARIANT",
+          "variantOptions": [
+            "SM",
+            "MD",
+            "LG"
+          ],
+          "defaultValue": "SM"
+        }
+      },
+      "page": "🧩 Components"
+    },
+    "Skeleton": {
+      "nodeId": "226:4514",
+      "type": "COMPONENT_SET",
+      "variants": 3,
+      "description": "Loading placeholder in the shape of what it replaces. variant maps to SkeletonVariant. Always decorative — the region carries aria-busy, not each shape.",
+      "properties": {
+        "Variant": {
+          "type": "VARIANT",
+          "variantOptions": [
+            "Text",
+            "Block",
+            "Circle"
+          ],
+          "defaultValue": "Text"
+        }
+      },
       "page": "🧩 Components"
     }
   }

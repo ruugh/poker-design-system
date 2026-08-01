@@ -100,12 +100,16 @@ function readCodeSide() {
 
 // ---------------------------------------------------------------- comparison
 
-/** Figma "Variant"/"Icon Start" -> code `variant`/`iconStart`. */
+/** Figma "Variant" / "Icon Start" / "ShowValue" -> code `variant` / `iconStart` / `showValue`. */
 const toPropName = (s) =>
   s
     .trim()
     .split(/[\s_-]+/)
-    .map((w, i) => (i === 0 ? w.toLowerCase() : w[0].toUpperCase() + w.slice(1).toLowerCase()))
+    .filter(Boolean)
+    // Only the leading character is lowered. A single token can already be PascalCase
+    // ("ShowValue"), and lowercasing the whole word would hand back "showvalue" and
+    // report a mismatch against a prop that matches perfectly well.
+    .map((w, i) => (i === 0 ? w[0].toLowerCase() + w.slice(1) : w[0].toUpperCase() + w.slice(1)))
     .join('');
 
 const norm = (s) => String(s).trim().toLowerCase().replace(/[\s_-]+/g, '');
