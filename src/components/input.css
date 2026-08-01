@@ -30,6 +30,29 @@
   color: var(--color-text-muted);
 }
 
+/* Required marker. Defined here and reused by Select — one asterisk treatment across
+   the whole form, rather than each field inventing its own. */
+.pm-field__required {
+  margin-inline-start: var(--space-2);
+  color: var(--color-danger-base);
+}
+
+/* Read-only is not disabled. Half the fields in a club profile are mirrored from the
+   room and cannot be edited, but the owner still needs to read and copy them — so the
+   value keeps full contrast and only the interactive border softens. Disabled greys the
+   text out and blocks selection; using it here would hide real data.
+   Note: <select> is always :read-only in CSS and has no readonly attribute, so this
+   state exists for Input only. */
+.pm-input:read-only:not(:disabled),
+.pm-input:read-only:not(:disabled):hover {
+  border-color: var(--color-border-base);
+  cursor: default;
+}
+.pm-input:read-only:not(:disabled):focus {
+  border-color: var(--color-focus-ring);
+  box-shadow: none;
+}
+
 .pm-input:hover:not(:disabled):not(:focus) {
   border-color: var(--color-text-secondary);
 }
@@ -40,8 +63,14 @@
   box-shadow: 0 0 0 3px var(--color-brand-wash);
 }
 
+/* The border softens too. Leaving border/control here gave a disabled field the same
+   strong boundary as an editable one, which reads as "editable but broken". WCAG exempts
+   inactive controls from the 3:1 boundary rule, and here the sunken fill already carries
+   the signal — unlike the disabled menu item, where the text states a reason and has to
+   stay readable. */
 .pm-input:disabled {
   background-color: var(--color-surface-sunken);
+  border-color: var(--color-border-base);
   color: var(--color-text-muted);
   cursor: not-allowed;
 }

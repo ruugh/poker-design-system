@@ -7,9 +7,14 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   /** helper or error text shown under the field */
   hint?: string;
   error?: boolean;
+  /**
+   * Marks the field required. Stays a native attribute — this only adds the visible
+   * marker, because an asterisk the browser cannot see is not a requirement.
+   */
+  required?: boolean;
 }
 
-export function Input({ label, hint, error = false, id, className, ...rest }: InputProps) {
+export function Input({ label, hint, error = false, required, id, className, ...rest }: InputProps) {
   const autoId = useId();
   const inputId = id ?? autoId;
   const hintId = hint ? `${inputId}-hint` : undefined;
@@ -20,11 +25,17 @@ export function Input({ label, hint, error = false, id, className, ...rest }: In
       {label && (
         <label className="pm-field__label" htmlFor={inputId}>
           {label}
+          {required ? (
+            <span className="pm-field__required" aria-hidden="true">
+              *
+            </span>
+          ) : null}
         </label>
       )}
       <input
         id={inputId}
         className="pm-input"
+        required={required}
         aria-invalid={error || undefined}
         aria-describedby={hintId}
         {...rest}

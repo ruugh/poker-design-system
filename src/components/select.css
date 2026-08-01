@@ -36,8 +36,11 @@
   border-color: var(--color-focus-ring);
   box-shadow: 0 0 0 3px var(--color-brand-wash);
 }
+/* Border softens with the fill, same reasoning as the Input — a disabled field must not
+   keep the boundary of an editable one. */
 .pm-select__input:disabled {
   background-color: var(--color-surface-sunken);
+  border-color: var(--color-border-base);
   color: var(--color-text-muted);
   cursor: not-allowed;
 }

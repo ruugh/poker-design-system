@@ -26,7 +26,7 @@
         "components": 8
       }
     ],
-    "note": "The design-system board and the v3 screens are still built from plain frames. Real component sets live on the 🧩 Components page, each wrapped in a labelled card naming its axes. Interactive controls carry the canonical set default/hover/pressed/focus/disabled."
+    "note": "The design-system board and the v3 screens are still built from plain frames. Real component sets live on the 🧩 Components page, each wrapped in a labelled card naming its axes. Interactive controls carry the canonical set default/hover/pressed/focus/disabled; the fields add Content (placeholder vs value), Required, and — for Input only — Read-only."
   },
   "components": {
     "Button": {
@@ -132,20 +132,33 @@
       "variants": 3
     },
     "Input": {
-      "nodeId": "188:4340",
+      "nodeId": "206:4498",
       "type": "COMPONENT_SET",
       "page": "🧩 Components",
-      "description": "Labelled text field. error maps to the error prop; State covers the CSS pseudo-classes and the native disabled attribute. label and hint are text overrides, not variants.",
+      "description": "Labelled text field. error and required map to props of the same name; State covers the CSS pseudo-classes plus the native readonly and disabled attributes; Content is placeholder vs value. Read-only keeps full text contrast — the value is still readable and selectable, unlike disabled.",
       "properties": {
+        "Required#206:0": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
         "State": {
           "type": "VARIANT",
           "variantOptions": [
             "Default",
             "Hover",
             "Focus",
+            "Read-only",
             "Disabled"
           ],
           "defaultValue": "Default"
+        },
+        "Content": {
+          "type": "VARIANT",
+          "variantOptions": [
+            "Empty",
+            "Filled"
+          ],
+          "defaultValue": "Empty"
         },
         "Error": {
           "type": "VARIANT",
@@ -156,14 +169,18 @@
           "defaultValue": "False"
         }
       },
-      "variants": 8
+      "variants": 20
     },
     "Select": {
-      "nodeId": "188:4389",
+      "nodeId": "208:4486",
       "type": "COMPONENT_SET",
       "page": "🧩 Components",
-      "description": "Native select in the same field shell as Input. error maps to the error prop; State covers the CSS pseudo-classes and the native disabled attribute.",
+      "description": "Native select in the same field shell as Input. error and required map to props of the same name; State covers the CSS pseudo-classes and the native disabled attribute; Content is placeholder vs chosen value. No Read-only: <select> has no readonly attribute.",
       "properties": {
+        "Required#208:0": {
+          "type": "BOOLEAN",
+          "defaultValue": false
+        },
         "State": {
           "type": "VARIANT",
           "variantOptions": [
@@ -174,6 +191,14 @@
           ],
           "defaultValue": "Default"
         },
+        "Content": {
+          "type": "VARIANT",
+          "variantOptions": [
+            "Empty",
+            "Filled"
+          ],
+          "defaultValue": "Empty"
+        },
         "Error": {
           "type": "VARIANT",
           "variantOptions": [
@@ -183,7 +208,7 @@
           "defaultValue": "False"
         }
       },
-      "variants": 8
+      "variants": 16
     },
     "Checkbox": {
       "nodeId": "189:4330",

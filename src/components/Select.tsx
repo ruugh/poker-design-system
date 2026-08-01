@@ -6,10 +6,12 @@ export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   label?: string;
   hint?: string;
   error?: boolean;
+  /** adds the visible marker; the native attribute still does the enforcing */
+  required?: boolean;
   children: ReactNode;
 }
 
-export function Select({ label, hint, error = false, id, className, children, ...rest }: SelectProps) {
+export function Select({ label, hint, error = false, required, id, className, children, ...rest }: SelectProps) {
   const autoId = useId();
   const selectId = id ?? autoId;
   const hintId = hint ? `${selectId}-hint` : undefined;
@@ -22,12 +24,18 @@ export function Select({ label, hint, error = false, id, className, children, ..
       {label && (
         <label className="pm-select-field__label" htmlFor={selectId}>
           {label}
+          {required ? (
+            <span className="pm-field__required" aria-hidden="true">
+              *
+            </span>
+          ) : null}
         </label>
       )}
       <div className="pm-select">
         <select
           id={selectId}
           className="pm-select__input"
+          required={required}
           aria-invalid={error || undefined}
           aria-describedby={hintId}
           {...rest}

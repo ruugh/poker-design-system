@@ -8,28 +8,40 @@
     "Figma canvas. Closing one means building a component set whose variant properties",
     "match the prop unions in the code, then deleting its line here."
   ],
-
   "figmaFile": "GBjzMmv920DVjATJqeEenz",
-
-  "ignoreCodeOnly": ["ToastProvider"],
+  "ignoreCodeOnly": [
+    "ToastProvider"
+  ],
   "ignoreFigmaOnly": [],
-
   "propAliases": {},
-
   "$nonPropProperties": [
-    "Figma properties that legitimately have no React prop. `state` is a variant axis",
-    "because Hover and Disabled change fills, and Figma cannot express a fill change as a",
-    "boolean — but in code they are a CSS pseudo-class and a native button attribute.",
-    "This is the two media disagreeing about mechanism, not the system drifting."
+    "Figma properties that legitimately have no React prop. state is a variant axis because",
+    "Hover and Disabled change fills, and Figma cannot express a fill change as a boolean —",
+    "but in code they are a CSS pseudo-class and a native attribute. content is placeholder",
+    "vs value, which in code is simply whether the field has text in it. This is the two",
+    "media disagreeing about mechanism, not the system drifting."
   ],
   "nonPropProperties": {
-    "Button": ["state"],
-    "Input": ["state"],
-    "Select": ["state"],
-    "Checkbox": ["checked", "state"],
-    "Switch": ["checked", "state"]
+    "Button": [
+      "state"
+    ],
+    "Input": [
+      "state",
+      "content"
+    ],
+    "Select": [
+      "state",
+      "content"
+    ],
+    "Checkbox": [
+      "checked",
+      "state"
+    ],
+    "Switch": [
+      "checked",
+      "state"
+    ]
   },
-
   "knownGaps": [
     "missing-in-figma:Tabs",
     "missing-in-figma:Tooltip",
