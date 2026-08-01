@@ -123,8 +123,16 @@ function compare(figma, code, config) {
   const nonPropProperties = config.nonPropProperties || {};
   const findings = [];
 
+  // Code props that are deliberately not design-time variants — placement, ids, labels.
+  // Modelling DropdownMenu's side x align in Figma would be twelve variants of the same
+  // menu, which documents Radix's collision logic rather than a design decision.
+  const nonVariantProps = config.nonVariantProps || {};
+
   const codeNames = Object.keys(code).filter((n) => !ignoreCodeOnly.has(n));
-  const figmaNames = Object.keys(figma).filter((n) => !ignoreFigmaOnly.has(n));
+  // A slash namespaces a Figma sub-part (`Tabs / Tab`, `Table / Row`). Those are how the
+  // canvas expresses what the code expresses with compound children, so they pair with
+  // nothing by design.
+  const figmaNames = Object.keys(figma).filter((n) => !ignoreFigmaOnly.has(n) && !n.includes('/'));
 
   for (const name of codeNames) {
     if (!figma[name]) findings.push({ kind: 'missing-in-figma', component: name });
@@ -189,8 +197,9 @@ function compare(figma, code, config) {
       }
     }
 
+    const notAVariant = new Set(nonVariantProps[name] || []);
     for (const prop of Object.keys(codeProps)) {
-      if (!figmaProps[prop]) {
+      if (!figmaProps[prop] && !notAVariant.has(prop)) {
         findings.push({ kind: 'prop-missing-in-figma', component: name, prop });
       }
     }

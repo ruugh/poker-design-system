@@ -43,9 +43,7 @@
     ]
   },
   "knownGaps": [
-    "missing-in-figma:Tabs",
     "missing-in-figma:Tooltip",
-    "missing-in-figma:Table",
     "missing-in-figma:Modal",
     "missing-in-figma:Banner",
     "missing-in-figma:Spinner",
@@ -53,7 +51,17 @@
     "missing-in-figma:Skeleton",
     "missing-in-figma:Drawer",
     "missing-in-figma:Popover",
-    "missing-in-figma:DropdownMenu",
     "missing-in-figma:Toast"
+  ],
+  "nonVariantProps": {
+    "DropdownMenu": [
+      "align",
+      "side"
+    ]
+  },
+  "$nonVariantProps": [
+    "Code props that are deliberately not design-time variants. Modelling",
+    "DropdownMenu side x align would be twelve variants of the same menu, documenting Radix",
+    "collision handling rather than a design decision."
   ]
 }

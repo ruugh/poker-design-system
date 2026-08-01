@@ -23,10 +23,10 @@
       {
         "id": "171:3897",
         "name": "🧩 Components",
-        "components": 8
+        "components": 15
       }
     ],
-    "note": "The design-system board and the v3 screens are still built from plain frames. Real component sets live on the 🧩 Components page, each wrapped in a labelled card naming its axes. Interactive controls carry the canonical set default/hover/pressed/focus/disabled; the fields add Content (placeholder vs value), Required, and — for Input only — Read-only."
+    "note": "The design-system board and the v3 screens are still built from plain frames. Real component sets live on the 🧩 Components page. A slash namespaces a Figma sub-part (Tabs / Tab, Table / Row) — the canvas equivalent of a compound child in code, which is why it pairs with no prop. Interactive controls carry the canonical set default/hover/pressed/focus/disabled."
   },
   "components": {
     "Button": {
@@ -273,6 +273,120 @@
         }
       },
       "variants": 10
+    },
+    "Tabs / Tab": {
+      "nodeId": "211:4390",
+      "type": "COMPONENT_SET",
+      "variants": 5,
+      "description": "One tab. Selected draws the 2px brand underline the CSS puts on aria-selected; Focus is the focus-visible outline. Roving arrow-key focus lives in the code, not here.",
+      "properties": {
+        "State": {
+          "type": "VARIANT",
+          "variantOptions": [
+            "Default",
+            "Hover",
+            "Focus",
+            "Selected",
+            "Disabled"
+          ],
+          "defaultValue": "Default"
+        }
+      },
+      "page": "🧩 Components"
+    },
+    "Tabs": {
+      "nodeId": "211:4391",
+      "type": "COMPONENT",
+      "variants": 1,
+      "description": "Tab bar with its panel. Compose it from Tabs / Tab instances and switch their State — the code takes items[] and owns selection, so there is no variant axis here.",
+      "properties": {},
+      "page": "🧩 Components"
+    },
+    "DropdownMenu / Item": {
+      "nodeId": "213:4401",
+      "type": "COMPONENT_SET",
+      "variants": 6,
+      "description": "One menu item. Highlighted is a single state on purpose — Radix sets data-highlighted for pointer hover and keyboard focus alike. Disabled keeps text/secondary because the item usually states why it is unavailable.",
+      "properties": {
+        "Tone": {
+          "type": "VARIANT",
+          "variantOptions": [
+            "Default",
+            "Danger"
+          ],
+          "defaultValue": "Default"
+        },
+        "State": {
+          "type": "VARIANT",
+          "variantOptions": [
+            "Default",
+            "Highlighted",
+            "Disabled"
+          ],
+          "defaultValue": "Default"
+        }
+      },
+      "page": "🧩 Components"
+    },
+    "DropdownMenu": {
+      "nodeId": "213:4402",
+      "type": "COMPONENT",
+      "variants": 1,
+      "description": "Actions on a thing. Compose from DropdownMenu / Item instances. side and align are Radix placement props, not design variants, so they are not modelled here.",
+      "properties": {},
+      "page": "🧩 Components"
+    },
+    "Table / Header cell": {
+      "nodeId": "214:4399",
+      "type": "COMPONENT_SET",
+      "variants": 6,
+      "description": "Sortable column header. Sort maps to the aria-sort value the code sets; Numeric mirrors th--num, which right-aligns the label so a money column and its header share one edge.",
+      "properties": {
+        "Sort": {
+          "type": "VARIANT",
+          "variantOptions": [
+            "None",
+            "Ascending",
+            "Descending"
+          ],
+          "defaultValue": "None"
+        },
+        "Numeric": {
+          "type": "VARIANT",
+          "variantOptions": [
+            "False",
+            "True"
+          ],
+          "defaultValue": "False"
+        }
+      },
+      "page": "🧩 Components"
+    },
+    "Table / Row": {
+      "nodeId": "214:4427",
+      "type": "COMPONENT_SET",
+      "variants": 3,
+      "description": "One data row. Signed amounts take success/ink and danger/ink and sit right-aligned on tabular numerals.",
+      "properties": {
+        "State": {
+          "type": "VARIANT",
+          "variantOptions": [
+            "Default",
+            "Hover",
+            "Selected"
+          ],
+          "defaultValue": "Default"
+        }
+      },
+      "page": "🧩 Components"
+    },
+    "Table": {
+      "nodeId": "214:4428",
+      "type": "COMPONENT",
+      "variants": 1,
+      "description": "Transactions and tables grid. Compose from Table / Header cell and Table / Row instances. The code is compound — Table.Head, Table.Row, Table.Cell — and these sub-parts are the canvas equivalent.",
+      "properties": {},
+      "page": "🧩 Components"
     }
   }
 }
